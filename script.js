@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   navLinks.forEach(link => {
     const linkPage = link.getAttribute("href").split("/").pop();
     if (linkPage === currentPage || (linkPage === "index.html" && currentPage === "")) {
-      link.style.color = "#ffeb3b"; // highlight yellow
+      link.style.color = "#008000"; // highlight green
       link.style.borderBottom = "2px solid #ffeb3b";
     }
   });
