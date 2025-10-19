@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const linkPage = link.getAttribute("href").split("/").pop();
     if (linkPage === currentPage || (linkPage === "index.html" && currentPage === "")) {
       link.style.color = "#008000"; // highlight green
-      link.style.borderBottom = "2px solid #ffeb3b";
+      link.style.borderBottom = "2px solid #008000";
     }
   });
 });
