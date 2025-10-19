@@ -42,5 +42,15 @@
       if (target) target.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
     });
   }
+  // Mobile dropdown toggle
+  var dropdowns = document.querySelectorAll('.dropdown > a');
+  dropdowns.forEach(function(drop) {
+    drop.addEventListener('click', function(e) {
+      e.preventDefault(); // prevent page jump
+      var parent = drop.parentElement;
+      parent.classList.toggle('open'); // open/close the dropdown
+    });
+  });
+
 
 })(); // ← End of IIFE
