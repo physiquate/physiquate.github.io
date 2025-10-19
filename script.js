@@ -5,7 +5,7 @@
 
   // --- NAV TOGGLE (for mobile menu) ---
   var toggle = document.querySelector('.nav-toggle');  // Selects the hamburger / toggle button
-  var links = document.querySelector('.nav-links');    // Selects the navigation link container
+  var links = document.querySelector('.nav-menu');    // Selects the navigation link container
 
   if(toggle){  // Only run if toggle button exists
     toggle.addEventListener('click', function(){       // When the toggle button is clicked
