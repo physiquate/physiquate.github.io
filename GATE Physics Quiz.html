@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE Physics Quiz</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Quiz-specific styling */
+    .quiz-question { margin-bottom: 20px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
+    .quiz-question p { font-weight: 600; }
+    .quiz-question label { display: block; margin: 6px 0; cursor: pointer; }
+    .correct { background-color: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; }
+    .incorrect { background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav-wrapper">
+    <div class="nav">
+      <div class="brand">Physiquater</div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gate.html">GATE</a></li>
+        <li><a href="quiz.html" class="active">Quiz</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" class="btn-login">Login</a></li>
+      </ul>
+      <button class="nav-toggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1 class="site-title">GATE Physics Quiz</h1>
+      <p class="motto">Test your knowledge instantly</p>
+      <a href="#quiz-container" class="down-arrow">↓</a>
+    </div>
+  </section>
+
+  <!-- Quiz Content -->
+  <main id="quiz-container" class="main">
+    <section class="panel">
+      <div class="container">
+        <h2>Quiz</h2>
+        <form id="quiz-form">
+
+          <!-- Question 1 -->
+          <div class="quiz-question" data-answer="A">
+            <p>1. What is the unit of electric charge?</p>
+            <label><input type="radio" name="q1" value="A"> A) Coulomb</label>
+            <label><input type="radio" name="q1" value="B"> B) Ampere</label>
+            <label><input type="radio" name="q1" value="C"> C) Volt</label>
+            <label><input type="radio" name="q1" value="D"> D) Ohm</label>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="quiz-question" data-answer="B">
+            <p>2. Which of the following is a vector quantity?</p>
+            <label><input type="radio" name="q2" value="A"> A) Speed</label>
+            <label><input type="radio" name="q2" value="B"> B) Acceleration</label>
+            <label><input type="radio" name="q2" value="C"> C) Mass</label>
+            <label><input type="radio" name="q2" value="D"> D) Temperature</label>
+          </div>
+
+          <button type="button" id="submit-btn" class="btn-login">Submit</button>
+        </form>
+
+        <!-- Result -->
+        <div id="quiz-result" style="margin-top: 20px; font-weight: bold;"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Physiquater | All rights reserved</p>
+  </footer>
+
+  <!-- JS for interactive quiz -->
+  <script>
+    const submitBtn = document.getElementById("submit-btn");
+    const resultDiv = document.getElementById("quiz-result");
+
+    submitBtn.addEventListener("click", () => {
+      const questions = document.querySelectorAll(".quiz-question");
+      let score = 0;
+
+      questions.forEach(q => {
+        const correctAnswer = q.dataset.answer;
+        const selected = q.querySelector('input[type="radio"]:checked');
+
+        // Reset previous feedback
+        q.querySelectorAll("label").forEach(label => {
+          label.classList.remove("correct", "incorrect");
+        });
+
+        if (selected) {
+          if (selected.value === correctAnswer) {
+            score++;
+            selected.parentElement.classList.add("correct");
+          } else {
+            selected.parentElement.classList.add("incorrect");
+            // highlight correct answer
+            q.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add("correct");
+          }
+        } else {
+          // no selection, highlight correct answer
+          q.querySelector(`input[value="${correctAnswer}"]`).parentElement.classList.add("correct");
+        }
+      });
+
+      resultDiv.textContent = `Your Score: ${score} / ${questions.length}`;
+    });
+  </script>
+
+</body>
+</html>
