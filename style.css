@@ -343,9 +343,8 @@ html {
 /* Collapsible content */
 .content {
   padding: 0 18px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  max-height: none;      /* shows all content */
+  overflow: visible;     /* allows scrolling if needed */
   background-color: #f7f7f8;
   margin-bottom: 8px;
   border-radius: 5px;
