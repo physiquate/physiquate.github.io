@@ -54,22 +54,30 @@ footer {
   color: white;
   margin-top: 3rem;
 }
+
 /* Navigation Menu */
 nav {
-  background: #283593;
-  padding: 1rem;
+  background-color: #1a1a1a;
+  padding: 1rem 0;
   text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid #3949ab;
 }
 
 nav a {
-  color: white;
+  color: #e0e0e0;
   text-decoration: none;
   margin: 0 1rem;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
 nav a:hover {
-  text-decoration: underline;
   color: #ffeb3b;
+  border-bottom: 2px solid #ffeb3b;
 }
+
 
