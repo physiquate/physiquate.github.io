@@ -1,107 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GATE Physics</title>
-  <link rel="stylesheet" href="style.css"> <!-- your existing CSS -->
-</head>
-<body>
+<main id="content" class="main">
 
-  <!-- Navigation -->
-  <nav class="nav-wrapper">
-    <div class="nav">
-      <div class="brand">Physiquater</div>
-      <ul class="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="gate.html" class="active">GATE</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="dropdown">
-          <a href="#">Resources</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Notes</a></li>
-            <li><a href="#">Previous Papers</a></li>
-          </ul>
-        </li>
-        <li><a href="login.html" class="btn-login">Login</a></li>
-      </ul>
-      <button class="nav-toggle">☰</button>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-overlay">
-      <h1 class="site-title">GATE Physics Preparation</h1>
-      <p class="motto">Ace your exams with structured resources</p>
-      <p class="tagline">Curated notes, previous year questions, and solved papers for GATE Physics aspirants.</p>
-      <a href="#content" class="down-arrow">↓</a>
+  <!-- Panel 1: Study Notes -->
+  <section class="panel">
+    <div class="container">
+      <h2>Study Notes</h2>
+      <p>Click on a topic to view details.</p>
+      
+      <button class="collapsible">Mechanics</button>
+      <div class="content">
+        <p>Notes on Newton’s Laws, Kinematics, Work & Energy, Rotational Motion.</p>
+      </div>
+      
+      <button class="collapsible">Electrodynamics</button>
+      <div class="content">
+        <p>Notes on Electric Fields, Circuits, Magnetic Fields, Maxwell’s Equations.</p>
+      </div>
+      
+      <button class="collapsible">Quantum Mechanics</button>
+      <div class="content">
+        <p>Notes on Wave Functions, Schrodinger Equation, Operators, Angular Momentum.</p>
+      </div>
+      
+      <button class="collapsible">Thermodynamics & Statistical Physics</button>
+      <div class="content">
+        <p>Notes on Laws of Thermodynamics, Heat Engines, Entropy, Boltzmann Statistics.</p>
+      </div>
+      
+      <button class="collapsible">Solid State Physics</button>
+      <div class="content">
+        <p>Notes on Crystal Structures, Band Theory, Semiconductors, Magnetism.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content Panels -->
-  <main id="content" class="main">
-
-    <!-- Panel 1: Notes -->
-    <section class="panel">
-      <div class="container">
-        <h2>Study Notes</h2>
-        <p>Comprehensive and simplified notes covering all important GATE Physics topics.</p>
+  <!-- Panel 2: Previous Year Questions -->
+  <section class="panel-alt">
+    <div class="container">
+      <h2>Previous Year Questions</h2>
+      <p>Click a year to see solved questions.</p>
+      
+      <button class="collapsible">GATE 2024</button>
+      <div class="content">
         <ul>
-          <li>Mechanics</li>
-          <li>Electrodynamics</li>
-          <li>Quantum Mechanics</li>
-          <li>Thermodynamics & Statistical Physics</li>
-          <li>Solid State Physics</li>
+          <li>Question 1: ...</li>
+          <li>Question 2: ...</li>
+          <li>Question 3: ...</li>
         </ul>
       </div>
-    </section>
-
-    <!-- Panel 2: Previous Year Questions -->
-    <section class="panel-alt">
-      <div class="container">
-        <h2>Previous Year Questions</h2>
-        <p>Access solved questions from past GATE exams to improve your problem-solving skills.</p>
+      
+      <button class="collapsible">GATE 2023</button>
+      <div class="content">
         <ul>
-          <li><a href="#">GATE 2024 Questions</a></li>
-          <li><a href="#">GATE 2023 Questions</a></li>
-          <li><a href="#">GATE 2022 Questions</a></li>
-          <li><a href="#">GATE 2021 Questions</a></li>
+          <li>Question 1: ...</li>
+          <li>Question 2: ...</li>
+          <li>Question 3: ...</li>
         </ul>
       </div>
-    </section>
 
-    <!-- Panel 3: Tips & Tricks -->
-    <section class="panel">
-      <div class="container">
-        <h2>Preparation Tips</h2>
-        <p>Effective strategies and tips to boost your GATE Physics score.</p>
-        <ul>
-          <li>Time management during exams</li>
-          <li>High-yield topics to focus on</li>
-          <li>Common mistakes to avoid</li>
-          <li>Practice with mock tests</li>
-        </ul>
-      </div>
-    </section>
+      <!-- Add more years similarly -->
+    </div>
+  </section>
 
-  </main>
+  <!-- Panel 3: Tips & Tricks -->
+  <section class="panel">
+    <div class="container">
+      <h2>Preparation Tips</h2>
+      <ul>
+        <li>Time management during exams</li>
+        <li>Focus on high-yield topics</li>
+        <li>Avoid common mistakes</li>
+        <li>Practice with mock tests</li>
+      </ul>
+    </div>
+  </section>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>© 2025 Physiquater | All rights reserved</p>
-  </footer>
-
-  <!-- Optional JS for mobile menu toggle -->
-  <script>
-    const toggle = document.querySelector('.nav-toggle');
-    const menu = document.querySelector('.nav-menu');
-
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('open');
-    });
-  </script>
-
-</body>
-</html>
+</main>
