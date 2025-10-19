@@ -48,5 +48,11 @@
         target.scrollIntoView({behavior:'smooth'});    // Scroll smoothly to that section
     });
   }
+  // Expand first collapsible on page load
+const firstContent = document.querySelector(".collapsible + .content");
+if (firstContent) {
+  firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+}
+
 
 })();  // ← End of IIFE (script runs automatically when loaded)
