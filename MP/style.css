@@ -35,7 +35,7 @@
 }
 
 /* Navigation links list */
-.nav-links {
+.nav-menu {
   list-style: none; /* removes bullet points */
   display: flex; /* places list items in a row */
   gap: 18px; /* adds spacing between links */
@@ -44,7 +44,7 @@
 }
 
 /* Individual navigation links */
-.nav-links a {
+.nav-menu a {
   color: var(--accent); /* dark accent color for text */
   text-decoration: none; /* removes underline */
   font-weight: 500; /* medium font weight */
