@@ -218,7 +218,7 @@ nav {
 .dropdown-menu {
   display: none; /* hidden by default */
   position: absolute; /* appears below parent */
-  top: 10px; /* distance below main link */
+  top: 20px; /* distance below main link */
   left: 0;
   background: #fff; /* white background */
   list-style: none;
