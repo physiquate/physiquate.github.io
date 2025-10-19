@@ -1,109 +1,110 @@
-
 <!-- ===== index.html ===== -->
-<!doctype html>
-<html lang="en">
+<!doctype html> <!-- Declares this document as HTML5 -->
+<html lang="en"> <!-- Root HTML element; language set to English -->
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Physiquate</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8"> <!-- Sets character encoding to UTF-8 for all text -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Makes site responsive on all devices -->
+  <title>Physiquate</title> <!-- The title shown on browser tab -->
+  <link rel="stylesheet" href="style.css"> <!-- Links external CSS file for styling -->
 </head>
+
 <body>
-  <nav>
-    <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-  
-      <!-- Learn Physics Dropdown -->
-      <li class="dropdown">
-        <a href="#">Learn Physics ▼</a>
-        <ul class="dropdown-menu">
-          <li><a href="mathematicalphysics.html">Mathematical Physics</a></li>
-          <li><a href="quantummechanics.html">Quantum Mechanics</a></li>
-          <li><a href="electromagnetism.html">Electromagnetism</a></li>
-          <li><a href="optics.html">Optics</a></li>
+  <!-- ===== Navigation Bar ===== -->
+  <nav> <!-- Defines the site’s navigation area -->
+    <ul class="nav-menu"> <!-- Unordered list holding all navigation items -->
+      
+      <li><a href="index.html">Home</a></li> <!-- Link to homepage -->
+
+      <!-- ===== Learn Physics Dropdown ===== -->
+      <li class="dropdown"> <!-- Dropdown menu item -->
+        <a href="#">Learn Physics ▼</a> <!-- Main dropdown label with down-arrow -->
+        <ul class="dropdown-menu"> <!-- Inner dropdown list -->
+          <li><a href="mathematicalphysics.html">Mathematical Physics</a></li> <!-- Sub-link -->
+          <li><a href="quantummechanics.html">Quantum Mechanics</a></li> <!-- Sub-link -->
+          <li><a href="electromagnetism.html">Electromagnetism</a></li> <!-- Sub-link -->
+          <li><a href="optics.html">Optics</a></li> <!-- Sub-link -->
           <!-- Add more subsections here -->
         </ul>
       </li>
-  
-      <!-- Exam Hub Dropdown -->
-      <li class="dropdown">
-        <a href="#">Exam Hub ▼</a>
-        <ul class="dropdown-menu">
-          <li><a href="gate.html">GATE</a></li>
-          <li><a href="csir.html">CSIR</a></li>
-          <li><a href="neet.html">NEET</a></li>
+
+      <!-- ===== Exam Hub Dropdown ===== -->
+      <li class="dropdown"> <!-- Another dropdown menu item -->
+        <a href="#">Exam Hub ▼</a> <!-- Label for the Exam Hub dropdown -->
+        <ul class="dropdown-menu"> <!-- Dropdown list for exams -->
+          <li><a href="gate.html">GATE</a></li> <!-- Exam page link -->
+          <li><a href="csir.html">CSIR</a></li> <!-- Exam page link -->
+          <li><a href="neet.html">NEET</a></li> <!-- Exam page link -->
           <!-- Add more exams here -->
         </ul>
       </li>
-  
-      <li><a href="videos.html">Videos</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="login.html" class="btn-login">Login / Register</a></li>
+
+      <li><a href="videos.html">Videos</a></li> <!-- Link to video resources -->
+      <li><a href="about.html">About Us</a></li> <!-- Link to About page -->
+      <li><a href="login.html" class="btn-login">Login / Register</a></li> <!-- Styled login/register button -->
     </ul>
   </nav>
-  </header>
+  </header> <!-- Closes header (not opened; likely leftover tag, can remove safely) -->
 
+  <!-- ===== HERO / FULLSCREEN SECTION ===== -->
+  <section id="home" class="hero"> <!-- Fullscreen introduction area -->
+    <div class="hero-overlay"> <!-- Overlay layer, usually darkened background -->
+      <h1 class="site-title">Physiquate</h1> <!-- Main site title -->
+      <p class="motto">Learn • Express • Expertise</p> <!-- Motto or slogan -->
+      <p class="tagline">A platform for exploring and expressing the beauty of physics.</p> <!-- Short description -->
+      <a href="#about" class="down-arrow" aria-label="Scroll down">⌄</a> <!-- Scroll-down arrow -->
+    </div>
+  </section>
 
-<!-- HERO / FULLSCREEN -->
-<section id="home" class="hero">
-<div class="hero-overlay">
-<h1 class="site-title">Physiquate</h1>
-<p class="motto">Learn • Express • Expertise</p>
-<p class="tagline">A platform for exploring and expressing the beauty of physics.</p>
-<a href="#about" class="down-arrow" aria-label="Scroll down">⌄</a>
-</div>
-</section>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main> <!-- Main content wrapper for accessibility and SEO -->
 
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about" class="panel"> <!-- First content section -->
+      <div class="container"> <!-- Centers and constrains content width -->
+        <h2>About</h2> <!-- Section title -->
+        <!-- Description paragraph: can be customized -->
+        <p>This section summarizes the purpose of Physiquate and provides a short biography of the author. Edit this paragraph in <code>index.html</code> to update your About text.</p>
+      </div>
+    </section>
 
-<!-- ABOUT -->
-<main>
-<section id="about" class="panel">
-<div class="container">
-<h2>About</h2>
-<!-- EDIT HERE: Replace this paragraph with your own short academic description -->
-<p>This section summarizes the purpose of Physiquate and provides a short biography of the author. Edit this paragraph in <code>index.html</code> to update your About text.</p>
-</div>
-</section>
+    <!-- ===== RESEARCH SECTION ===== -->
+    <section id="research" class="panel panel-alt"> <!-- Alternate-styled section -->
+      <div class="container">
+        <h2>Research</h2> <!-- Section title -->
+        <p>Research interests: condensed matter physics, computational modelling, and applied optics. Add details or link to specific projects here.</p> <!-- Research description -->
+      </div>
+    </section>
 
+    <!-- ===== PUBLICATIONS SECTION ===== -->
+    <section id="publications" class="panel"> <!-- Section for listing publications -->
+      <div class="container">
+        <h2>Publications</h2> <!-- Section heading -->
+        <ul> <!-- List of publication entries -->
+          <li>Author A., et al., <em>Title of paper</em>, Journal, Year. <a href="#">(link)</a></li> <!-- Example paper item -->
+        </ul>
+      </div>
+    </section>
 
-<!-- RESEARCH -->
-<section id="research" class="panel panel-alt">
-<div class="container">
-<h2>Research</h2>
-<!-- EDIT HERE: Add research interests or short bullet points -->
-<p>Research interests: condensed matter physics, computational modelling, and applied optics. Add details or link to specific projects here.</p>
-</div>
-</section>
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact" class="panel panel-alt"> <!-- Final section with alternate background -->
+      <div class="container">
+        <h2>Contact</h2> <!-- Heading -->
+        <p>For collaborations and enquiries, email: 
+          <a href="mailto:your.email@example.com">your.email@example.com</a> <!-- Clickable email link -->
+        </p>
+      </div>
+    </section>
 
+  </main>
 
-<!-- PUBLICATIONS -->
-<section id="publications" class="panel">
-<div class="container">
-<h2>Publications</h2>
-<!-- EDIT HERE: Replace with a list of publications or links (use <ul><li>) -->
-<ul>
-<li>Author A., et al., <em>Title of paper</em>, Journal, Year. <a href="#">(link)</a></li>
-</ul>
-</div>
-</section>
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer"> <!-- Footer area -->
+    <div class="container small">
+      © <span id="year"></span> Physiquate — Mohamed Nawas <!-- Dynamic year added via JS -->
+    </div>
+  </footer>
 
-
-<!-- CONTACT -->
-<section id="contact" class="panel panel-alt">
-<div class="container">
-<h2>Contact</h2>
-<!-- EDIT HERE: Put your contact details or an email link -->
-<p>For collaborations and enquiries, email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-</div>
-</section>
-</main>
-
-
-<footer class="site-footer">
-<div class="container small">© <span id="year"></span> Physiquate — Mohamed Nawas</div>
-</footer>
-
-
-<script src="script.js"></script>
+  <!-- ===== SCRIPT LINK ===== -->
+  <script src="script.js"></script> <!-- Connects to JavaScript file for interactivity -->
 </body>
 </html>
