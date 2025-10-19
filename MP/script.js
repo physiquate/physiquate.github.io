@@ -1,56 +1,40 @@
 // ===== script.js =====
-// This script handles navigation toggle, scroll animations, and footer year
-
-(function () { // IIFE → runs automatically to avoid polluting global scope
-
+(function () {
   // --- NAV TOGGLE (for mobile menu) ---
-  var toggle = document.querySelector('.nav-toggle');  // Selects ☰ toggle button
-  var menu = document.querySelector('.nav-menu');      // Selects navigation menu (<ul>)
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.querySelector('.nav-menu');
 
-  // Run only if both elements exist
   if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      // Adds or removes the "active" class (for showing/hiding mobile menu)
-      menu.classList.toggle('active');  // Toggle visibility
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active'); // shows/hides mobile menu
     });
   }
 
-  // --- SET YEAR (for footer) ---
-  var yearEl = document.getElementById('year');        // Finds element with id="year"
-  if (yearEl) yearEl.textContent = new Date().getFullYear(); // Sets current year (e.g., 2025)
-
-  // --- REVEAL ON SCROLL (simple fade-in animation) ---
-  var panels = document.querySelectorAll('.panel');    // Selects all .panel sections
-
-  // IntersectionObserver detects when elements appear in viewport
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {                      // If panel enters view
-        entry.target.classList.add('visible');         // Add .visible → triggers CSS animation
-      }
-    });
-  }, { threshold: 0.12 });                             // Trigger when 12% visible
-
-  panels.forEach(function (p) { io.observe(p); });     // Observe all panels
-
-  // --- SMOOTH SCROLL FOR DOWN ARROW ---
-  var down = document.querySelector('.down-arrow');    // Select ⌄ icon link
-  if (down) {
-    down.addEventListener('click', function (e) {
-      e.preventDefault();                              // Prevent jumpy default
-      var target = document.querySelector('#about');   // Target the About section
-      if (target) target.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
-    });
-  }
-  // Mobile dropdown toggle
-  var dropdowns = document.querySelectorAll('.dropdown > a');
-  dropdowns.forEach(function(drop) {
-    drop.addEventListener('click', function(e) {
-      e.preventDefault(); // prevent page jump
-      var parent = drop.parentElement;
-      parent.classList.toggle('open'); // open/close the dropdown
+  // --- MOBILE DROPDOWN TOGGLE ---
+  const dropdowns = document.querySelectorAll('.dropdown > a');
+  dropdowns.forEach(drop => {
+    drop.addEventListener('click', e => {
+      e.preventDefault();
+      const parent = drop.parentElement;
+      parent.classList.toggle('open'); // open/close dropdown
     });
   });
 
+  // --- SCROLL REVEAL PANELS ---
+  const panels = document.querySelectorAll('.panel');
+  const io = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  panels.forEach(p => io.observe(p));
 
-})(); // ← End of IIFE
+  // --- FOOTER YEAR ---
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+})();
