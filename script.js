@@ -1,52 +1,46 @@
 // ===== script.js =====
-// Simple scripts: mobile nav toggle, reveal on scroll, set year
+// This script handles navigation toggle, scroll animations, and footer year
 
-(function(){  // ← Immediately Invoked Function Expression (IIFE) to avoid polluting global scope
+(function () { // IIFE → runs automatically to avoid polluting global scope
 
   // --- NAV TOGGLE (for mobile menu) ---
-  var toggle = document.querySelector('.nav-toggle');  // Selects the hamburger / toggle button
-  var links = document.querySelector('.nav-menu');    // Selects the navigation link container
+  var toggle = document.querySelector('.nav-toggle');  // Selects ☰ toggle button
+  var menu = document.querySelector('.nav-menu');      // Selects navigation menu (<ul>)
 
-  if(toggle){  // Only run if toggle button exists
-    toggle.addEventListener('click', function(){       // When the toggle button is clicked
-      if(links.style.display === 'flex')               // If links are already visible
-        links.style.display = 'none';                  // Hide them
-      else 
-        links.style.display = 'flex';                  // Otherwise, show them
+  // Run only if both elements exist
+  if (toggle && menu) {
+    toggle.addEventListener('click', function () {
+      // Adds or removes the "active" class (for showing/hiding mobile menu)
+      menu.classList.toggle('active');  // Toggle visibility
     });
   }
 
+  // --- SET YEAR (for footer) ---
+  var yearEl = document.getElementById('year');        // Finds element with id="year"
+  if (yearEl) yearEl.textContent = new Date().getFullYear(); // Sets current year (e.g., 2025)
 
-  // --- SET YEAR (for footer or copyright text) ---
-  var yearEl = document.getElementById('year');        // Gets the element with ID "year"
-  if(yearEl)                                           // If found
-    yearEl.textContent = new Date().getFullYear();     // Replace its text with the current year (e.g. 2025)
+  // --- REVEAL ON SCROLL (simple fade-in animation) ---
+  var panels = document.querySelectorAll('.panel');    // Selects all .panel sections
 
-
-  // --- REVEAL ON SCROLL (animation when panels come into view) ---
-  var panels = document.querySelectorAll('.panel');    // Selects all elements with class "panel"
-
-  // Create an IntersectionObserver to detect when panels appear in viewport
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){                        // If the element is visible in viewport
-        entry.target.classList.add('visible');         // Add "visible" class (CSS handles animation)
+  // IntersectionObserver detects when elements appear in viewport
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {                      // If panel enters view
+        entry.target.classList.add('visible');         // Add .visible → triggers CSS animation
       }
     });
-  }, {threshold:0.12});                                // Trigger when 12% of element is visible
+  }, { threshold: 0.12 });                             // Trigger when 12% visible
 
-  panels.forEach(function(p){ io.observe(p); });        // Observe all panels
+  panels.forEach(function (p) { io.observe(p); });     // Observe all panels
 
-
-  // --- OPTIONAL: Down arrow click (scrolls to #about section smoothly) ---
-  var down = document.querySelector('.down-arrow');    // Select the "down arrow" link
-  if(down){
-    down.addEventListener('click', function(e){
-      e.preventDefault();                              // Stop normal link behavior
-      var target = document.querySelector('#about');   // Target the section with ID "about"
-      if(target)
-        target.scrollIntoView({behavior:'smooth'});    // Scroll smoothly to that section
+  // --- SMOOTH SCROLL FOR DOWN ARROW ---
+  var down = document.querySelector('.down-arrow');    // Select ⌄ icon link
+  if (down) {
+    down.addEventListener('click', function (e) {
+      e.preventDefault();                              // Prevent jumpy default
+      var target = document.querySelector('#about');   // Target the About section
+      if (target) target.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
     });
   }
 
-})();  // ← End of IIFE (script runs automatically when loaded)
+})(); // ← End of IIFE
