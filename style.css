@@ -169,7 +169,13 @@
   .hero-overlay { padding: 26px; } /* reduce padding in hero */
   .tagline { font-size: 15px; } /* smaller text for readability */
 }
-
+/* ===== SHOW MENU WHEN JS ADDS .active ===== */
+.nav-menu.active {
+  display: flex !important;      /* Show the hidden menu */
+  flex-direction: column;        /* Stack vertically (mobile style) */
+  background: #f8f8f8;           /* Light background for dropdown */
+  width: 100%;                   /* Full width under navbar */
+}
 
 /* ---------- NAVIGATION BAR STYLING ---------- */
 nav {
