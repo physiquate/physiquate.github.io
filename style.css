@@ -79,5 +79,9 @@ nav a:hover {
   color: #ffeb3b;
   border-bottom: 2px solid #ffeb3b;
 }
+header {
+  margin-top: 1rem;
+}
+
 
 
