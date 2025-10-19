@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ---------- Highlight Active Menu Item ----------
+  // Highlight active menu item
   const currentPage = window.location.pathname.split("/").pop();
   const navLinks = document.querySelectorAll("nav a");
 
@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ---------- Smooth Scroll for Internal Links ----------
-  const headerOffset = 70; // optional, if you have a fixed header
+  // Smooth scroll for internal links
+  const headerOffset = 70; // if you have fixed header
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function(e) {
       e.preventDefault();
