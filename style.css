@@ -205,7 +205,12 @@ nav {
   padding: 5px 10px; /* clickable padding area */
   transition: color 0.3s; /* smooth hover animation */
 }
-
+/* Add dropdown arrow after link text */
+.dropdown > a::after {
+  content: "▼";        /* the arrow */
+  font-size: 12px;     /* smaller arrow size */
+  margin-left: 4px;    /* spacing from link text */
+}
 /* Hover or active menu item */
 .nav-menu a:hover,
 .nav-menu a.active {
