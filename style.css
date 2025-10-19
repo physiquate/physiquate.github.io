@@ -70,7 +70,10 @@ nav {
   margin: 0;
   padding: 0;
 }
-
+/* Push the last item (login/register) to the right */
+.nav-menu li:last-child {
+  margin-left: auto;  /* This pushes it to the far right */
+}
 .nav-menu li {
   position: relative;
 }
