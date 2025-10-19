@@ -1,30 +1,41 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Highlight active menu item
-  const currentPage = window.location.pathname.split("/").pop();
-  const navLinks = document.querySelectorAll("nav a");
-
-  navLinks.forEach(link => {
-    const linkPage = link.getAttribute("href").split("/").pop();
-    if (linkPage === currentPage || (linkPage === "index.html" && currentPage === "")) {
-      link.classList.add("active");
-    }
-  });
-
-  // Smooth scroll for internal links
-  const headerOffset = 70; // if you have fixed header
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-      }
-    });
-  });
+// ===== script.js =====
+// Simple scripts: mobile nav toggle, reveal on scroll, set year
+(function(){
+// NAV TOGGLE
+var toggle = document.querySelector('.nav-toggle');
+var links = document.querySelector('.nav-links');
+if(toggle){
+toggle.addEventListener('click', function(){
+if(links.style.display === 'flex') links.style.display = 'none';
+else links.style.display = 'flex';
 });
+}
+
+
+// SET YEAR
+var yearEl = document.getElementById('year');
+if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+
+// REVEAL ON SCROLL
+var panels = document.querySelectorAll('.panel');
+var io = new IntersectionObserver(function(entries){
+entries.forEach(function(entry){
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+}
+});
+},{threshold:0.12});
+panels.forEach(function(p){ io.observe(p); });
+
+
+// OPTIONAL: down arrow click (smooth scroll is native but we add slight behaviour)
+var down = document.querySelector('.down-arrow');
+if(down){
+down.addEventListener('click', function(e){
+e.preventDefault();
+var target = document.querySelector('#about');
+if(target) target.scrollIntoView({behavior:'smooth'});
+});
+}
+})();
