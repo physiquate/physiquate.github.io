@@ -281,3 +281,38 @@ html {
   opacity: 1; /* visible */
   transform: none; /* return to normal position */
 }
+
+/* ---------- MOBILE MENU ---------- */
+@media (max-width:800px) {
+  .nav-menu {
+    display: none;                 /* hidden by default on mobile */
+    flex-direction: column;        /* stack menu items vertically */
+    gap: 0;
+    width: 100%;
+    background: #f8f8f8;           /* background for mobile menu */
+    padding: 10px 0;
+    position: absolute;            /* appears below navbar */
+    top: 56px;                     /* adjust to nav height */
+    left: 0;
+  }
+  .nav-toggle { display: inline-block; } /* show toggle button */
+  .nav-menu li { width: 100%; }          /* full width for menu items */
+  .nav-menu a { display: block; padding: 12px 20px; } /* bigger clickable area */
+}
+
+/* allow JS to open dropdowns on mobile */
+.dropdown.open > .dropdown-menu {
+  display: block !important;
+}
+
+/* adjust dropdown submenu on mobile */
+@media (max-width:800px) {
+  .dropdown-menu {
+    position: static;   /* flow under parent item */
+    box-shadow: none;
+    min-width: auto;
+    padding-left: 0;
+  }
+  .dropdown-menu li a { padding-left: 30px; } /* indent submenu items */
+}
+
