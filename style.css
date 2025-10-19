@@ -241,7 +241,7 @@ nav {
 }
 
 /* Show dropdown when hovering over parent */
-.dropdown:hover .dropdown-menu {
+.dropdown:hover >.dropdown-menu {
   display: block; /* reveals hidden dropdown list */
 }
 
