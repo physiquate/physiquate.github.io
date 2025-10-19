@@ -80,5 +80,12 @@ nav a:hover {
   border-bottom: 2px solid #ffeb3b;
 }
 
+/* Active menu item highlight */
+nav a.active {
+  color: green;                 /* text color */
+  border-bottom: 2px solid green; /* underline */
+}
+
+
 
 
