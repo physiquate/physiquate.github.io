@@ -188,6 +188,9 @@ document.addEventListener('DOMContentLoaded', function(){
     const navigationDiv = examDiv.querySelector('.navigation');
     examDiv.insertBefore(qDiv, navigationDiv);
   });
+  // Render LaTeX for newly added questions
+  MathJax.typesetPromise();
+
 
   // ===== Step 6: Start Exam Logic =====
   const studentForm = document.getElementById('student-form');
@@ -304,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
