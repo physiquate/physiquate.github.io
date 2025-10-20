@@ -326,33 +326,41 @@ html {
   }
   .dropdown-menu li a { padding-left: 30px; } /* indent submenu items */
 }
-/* Collapsible buttons */
+/* ===== COLLAPSIBLE SECTION ===== */
 .collapsible {
   background-color: var(--accent);
   color: var(--light);
   cursor: pointer;
-  padding: 12px 18px;
+  padding: 12px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 16px;
-  margin: 6px 0;
+  font-size: 1rem;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .collapsible:hover {
-  background-color: #1f2a38; /* slightly darker accent on hover */
+  background-color: #1f2e3a;
 }
 
-/* Collapsible content */
+.collapsible.active {
+  background-color: #3c4a58;
+}
+
 .content {
   padding: 0 18px;
-  max-height: 0;
+  display: none;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  background-color: #f7f7f8;
-  margin-bottom: 8px;
+  background-color: #f9f9f9;
+  border-left: 2px solid var(--accent);
   border-radius: 5px;
+  margin-top: 5px;
 }
+
+.content.show {
+  display: block;
+}
+
