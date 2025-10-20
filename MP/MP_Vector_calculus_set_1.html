@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function(){
        
   // ===== Send student details to Google Sheets =====
   const timestamp = new Date().toLocaleString(); // optional if you want
-  fetch("YOUR_WEB_APP_URL", { // <-- Replace with your Web App URL
+  fetch("https://script.google.com/macros/s/AKfycbwN4XqtJwpN-RyH1b76eAw6tfMHdkdpEQTEpRD5q07W7RRvme_9RiPu0sfeXOCDNbfb/exec", { // <-- Replace with your Web App URL
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -281,6 +281,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
