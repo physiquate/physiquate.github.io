@@ -173,6 +173,13 @@ document.addEventListener('DOMContentLoaded', function(){
     studentInfo.innerHTML = `<strong>Name:</strong> ${name} | <strong>Email:</strong> ${email} | <strong>Exam:</strong> ${title}`;
     studentForm.style.display='none';
     examDiv.style.display='block';
+       
+    // ===== Save student details in LocalStorage =====
+    const timestamp = new Date().toLocaleString();
+    let examEntries = JSON.parse(localStorage.getItem('examEntries') || '[]');
+    examEntries.push({ name: name, email: email, title: title, time: timestamp });
+    localStorage.setItem('examEntries', JSON.stringify(examEntries));
+
 
     // ===================================================Timer (1 hour) ================================================================================
     let time = 60*60;
@@ -263,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
