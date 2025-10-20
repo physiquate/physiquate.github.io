@@ -47,8 +47,23 @@
   .incorrect-text { color:#c62828; font-weight:bold; }
 </style>
 
-<!-- ===== MathJax Library for LaTeX support ===== -->
+<!-- ===== MathJax Configuration for inline $...$ support ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+
+<!-- ===== MathJax Library ===== -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 
 </head>
 <body>
@@ -307,6 +322,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
