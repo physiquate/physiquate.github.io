@@ -1,5 +1,5 @@
 // Dynamically load navbar
-fetch("common/nav.html")
+fetch("../common/nav.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById("navbar").innerHTML = html;
