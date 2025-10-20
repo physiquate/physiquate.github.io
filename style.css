@@ -1,332 +1,209 @@
-/* ===== style.css ===== */
-
-/* ---------- ROOT VARIABLES ---------- */
+/* ===== ROOT VARIABLES ===== */
 :root {
-  --bg-image: url('background.jpg'); /* background image used in hero section */
-  --accent: #2c3e50;     /* dark accent color for text and highlights */
-  --muted: #6b7280;      /* soft gray tone for secondary text */
-  --light: #ffffff;      /* white color used for text and backgrounds */
-  --panel-bg: #f7f7f8;   /* light gray used for panels or page background */
+  --bg-image: url('background.jpg'); /* Hero background image */
+  --accent: #2c3e50;                 /* Dark accent color */
+  --muted: #6b7280;                  /* Gray text */
+  --light: #ffffff;                  /* White text */
+  --panel-bg: #f7f7f8;               /* Panel background */
 }
 
-/* ---------- NAVIGATION WRAPPER ---------- */
-.nav-wrapper {
-  position: fixed; /* keeps navbar always visible on top */
-  top: 0; left: 0; right: 0; /* stretches navbar across full width */
-  z-index: 60; /* ensures navbar stays above other elements */
-  background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.6)); /* translucent gradient background */
-  backdrop-filter: blur(4px); /* adds a glass-like blur effect */
-}
-
-/* ---------- NAVIGATION INNER AREA ---------- */
-.nav {
-  max-width: 1100px; /* limits width of nav content */
-  margin: 0 auto; /* centers nav horizontally */
-  display: flex; /* aligns items horizontally */
-  align-items: center; /* vertically centers nav elements */
-  justify-content: space-between; /* separates brand and links */
-  padding: 12px 20px; /* inner spacing */
-}
-
-/* Site brand/logo */
-.brand {
-  font-weight: 700; /* bold text */
-  color: var(--accent); /* dark accent color */
-}
-
-/* Navigation links list */
-.nav-links {
-  list-style: none; /* removes bullet points */
-  display: flex; /* places list items in a row */
-  gap: 18px; /* adds spacing between links */
+/* ===== GLOBAL RESET ===== */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Individual navigation links */
-.nav-links a {
-  color: var(--accent); /* dark accent color for text */
-  text-decoration: none; /* removes underline */
-  font-weight: 500; /* medium font weight */
+body {
+  font-family: Arial, sans-serif;
+  color: var(--accent);
+  background: var(--panel-bg);
 }
 
-/* Mobile menu toggle button (hidden by default) */
-.nav-toggle {
-  display: none; /* hides toggle until mobile view */
-  background: none;
-  border: 0;
-  font-size: 20px; /* icon size */
+/* ===== NAVBAR ===== */
+.nav-wrapper {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+  backdrop-filter: blur(4px);
 }
 
+.nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
 
-/* ---------- HERO SECTION ---------- */
+.brand {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-menu li:last-child {
+  margin-left: auto; /* pushes Login/Register to right */
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--accent);
+  padding: 6px 10px;
+  transition: 0.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: green;
+  border-bottom: 2px solid green;
+}
+
+/* Dropdown arrow */
+.dropdown > a::after {
+  content: "▼";
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background: #fff;
+  list-style: none;
+  padding: 8px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 180px;
+  z-index: 200;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 15px;
+  color: #000;
+}
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Login button */
+.btn-login {
+  background: green;
+  color: #fff !important;
+  padding: 6px 14px;
+  border-radius: 5px;
+}
+
+/* ===== HERO SECTION ===== */
 .hero {
-  height: 100vh; /* full viewport height */
-  background-image: var(--bg-image); /* uses background image variable */
-  background-size: cover; /* image covers whole section */
-  background-position: center; /* centers image */
-  display: flex; /* centers overlay */
+  height: 100vh;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  display: flex;
   align-items: center;
   justify-content: center;
-  position: relative; /* allows overlay layering */
+  position: relative;
 }
 
-/* Semi-transparent overlay over hero image */
 .hero-overlay {
   width: 100%;
   height: 100%;
-  display: flex; /* vertically centers text */
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center; /* centers text horizontally */
+  text-align: center;
   padding: 40px;
-  background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.15)); /* faint gradient overlay */
+  background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.05));
 }
 
-/* Site title text in hero */
 .site-title {
-  font-size: clamp(28px,6vw,56px); /* responsive font size */
-  margin: 0;
-  color: var(--light); /* white text */
-  text-shadow: 0 6px 18px rgba(0,0,0,0.45); /* soft shadow for readability */
-  font-weight: 700; /* bold */
+  font-size: clamp(28px, 6vw, 56px);
+  color: var(--light);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  font-weight: 700;
 }
 
-/* Motto (smaller subtitle under title) */
 .motto {
   margin: 10px 0 6px;
   color: var(--light);
   font-weight: 600;
-  letter-spacing: 2px; /* spaces letters slightly */
+  letter-spacing: 2px;
 }
 
-/* Short description tagline */
 .tagline {
-  max-width: 820px; /* restricts text width */
-  margin: 0;
-  color: rgba(255,255,255,0.92); /* slightly transparent white */
+  max-width: 820px;
+  color: rgba(255,255,255,0.9);
 }
 
-/* Down arrow below hero text */
 .down-arrow {
   display: inline-block;
   margin-top: 28px;
   font-size: 28px;
   color: var(--light);
   text-decoration: none;
-  opacity: 0.95; /* soft transparency */
 }
 
-
-/* ---------- CONTENT PANELS ---------- */
-.main {
-  background: var(--panel-bg); /* overall light background */
-}
-
-/* Default panel section style */
+/* ===== PANELS ===== */
 .panel {
-  padding: 80px 20px; /* spacing around content */
-  background: var(--light); /* white background */
-  color: var(--accent); /* dark text */
+  padding: 80px 20px;
+  background: var(--light);
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Alternate panel with slightly different tone */
+.panel.visible {
+  opacity: 1;
+  transform: none;
+}
+
 .panel-alt {
-  background: #fafafa; /* pale gray */
+  background: #fafafa;
 }
 
-/* Central content wrapper */
 .container {
-  max-width: 900px; /* keeps content narrow for readability */
-  margin: 0 auto; /* centers horizontally */
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* Headings inside container */
 .container h2 {
   margin-top: 0;
   color: var(--accent);
 }
 
-/* Small text, used in footer */
+/* Footer small text */
 .small {
   font-size: 14px;
   color: var(--muted);
 }
 
-/* Footer area styling */
 .site-footer {
   padding: 26px 20px;
   text-align: center;
   background: transparent;
 }
 
-
-/* ---------- RESPONSIVE DESIGN (for small screens) ---------- */
-@media (max-width:800px) {
-  .nav-links { display: none; } /* hides nav links on small screens */
-  .nav-toggle { display: inline-block; } /* shows menu toggle button */
-  .hero-overlay { padding: 26px; } /* reduce padding in hero */
-  .tagline { font-size: 15px; } /* smaller text for readability */
-}
-/* ===== SHOW MENU WHEN JS ADDS .active ===== */
-.nav-menu.active {
-  display: flex !important;      /* Show the hidden menu */
-  flex-direction: column;        /* Stack vertically (mobile style) */
-  background: #f8f8f8;           /* Light background for dropdown */
-  width: 100%;                   /* Full width under navbar */
-}
-
-/* ---------- NAVIGATION BAR STYLING ---------- */
-nav {
-  background: #f8f8f8; /* light background color for navbar */
-  padding: 10px 20px; /* inner spacing */
-  font-family: Arial, sans-serif; /* basic sans-serif font */
-}
-
-/* Navigation menu list */
-.nav-menu {
-  list-style: none; /* remove bullets */
-  display: flex; /* arrange horizontally */
-  gap: 20px; /* spacing between items */
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-/* Push the last item (Login/Register) to far right */
-.nav-menu li:last-child {
-  margin-left: auto; /* forces it to rightmost edge */
-}
-
-/* Each list item in nav */
-.nav-menu li {
-  position: relative; /* used for dropdown positioning */
-}
-
-/* All navigation links */
-.nav-menu a {
-  text-decoration: none; /* removes underline */
-  color: #000; /* black text */
-  padding: 5px 10px; /* clickable padding area */
-  transition: color 0.3s; /* smooth hover animation */
-}
-/* Add dropdown arrow after link text */
-.dropdown > a::after {
-  content: "▼";        /* the arrow */
-  font-size: 12px;     /* smaller arrow size */
-  margin-left: 4px;    /* spacing from link text */
-}
-/* Hover or active menu item */
-.nav-menu a:hover,
-.nav-menu a.active {
-  color: green; /* highlight text color */
-  border-bottom: 2px solid green; /* green underline effect */
-}
-
-
-/* ---------- DROPDOWN MENU STYLING ---------- */
-.dropdown-menu {
-  display: none; /* hidden by default */
-  position: absolute; /* appears below parent */
-  top: 20px; /* distance below main link */
-  left: 0;
-  background: #fff; /* white background */
-  list-style: none;
-  padding: 10px 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* subtle shadow */
-  min-width: 180px; /* fixed width */
-  z-index: 100; /* sits above other elements */
-}
-
-/* Dropdown item sizing */
-.dropdown-menu li {
-  width: 100%;
-}
-
-/* Dropdown menu links */
-.dropdown-menu li a {
-  display: block; /* full width clickable */
-  padding: 8px 15px;
-  color: #000;
-}
-
-/* Show dropdown when hovering over parent */
-.dropdown:hover > .dropdown-menu {
-  display: block; /* reveals hidden dropdown list */
-}
-
-
-/* ---------- LOGIN / REGISTER BUTTON ---------- */
-.btn-login {
-  background: green; /* green background */
-  color: #fff !important; /* force white text */
-  padding: 5px 15px;
-  border-radius: 5px; /* rounded corners */
-}
-
-
-/* ---------- ACTIVE MENU HIGHLIGHT ---------- */
-nav a.active {
-  color: green; /* green text color */
-  border-bottom: 2px solid green; /* underline to show active page */
-}
-
-
-/* ---------- SMOOTH SCROLL BEHAVIOR ---------- */
-html {
-  scroll-behavior: smooth; /* enables smooth scrolling when using anchor links */
-}
-
-
-/* ---------- SCROLL REVEAL EFFECT ---------- */
-/* All panels are hidden slightly by default */
-.panel {
-  opacity: 0; /* invisible initially */
-  transform: translateY(20px); /* shifted downward */
-  transition: opacity 0.6s ease, transform 0.6s ease; /* smooth fade-in + slide-up */
-}
-
-/* When JavaScript adds .visible class, panels appear */
-.panel.visible {
-  opacity: 1; /* visible */
-  transform: none; /* return to normal position */
-}
-
-/* ---------- MOBILE MENU ---------- */
-@media (max-width:800px) {
-  .nav-menu {
-    display: none;                 /* hidden by default on mobile */
-    flex-direction: column;        /* stack menu items vertically */
-    gap: 0;
-    width: 100%;
-    background: #f8f8f8;           /* background for mobile menu */
-    padding: 10px 0;
-    position: absolute;            /* appears below navbar */
-    top: 56px;                     /* adjust to nav height */
-    left: 0;
-  }
-  .nav-toggle { display: inline-block; } /* show toggle button */
-  .nav-menu li { width: 100%; }          /* full width for menu items */
-  .nav-menu a { display: block; padding: 12px 20px; } /* bigger clickable area */
-}
-
-/* allow JS to open dropdowns on mobile */
-.dropdown.open > .dropdown-menu {
-  display: block !important;
-}
-
-/* adjust dropdown submenu on mobile */
-@media (max-width:800px) {
-  .dropdown-menu {
-    position: static;   /* flow under parent item */
-    box-shadow: none;
-    min-width: auto;
-    padding-left: 0;
-  }
-  .dropdown-menu li a { padding-left: 30px; } /* indent submenu items */
-}
-/* ===== COLLAPSIBLE SECTION ===== */
+/* ===== COLLAPSIBLE SECTIONS ===== */
 .collapsible {
   background-color: var(--accent);
   color: var(--light);
@@ -364,3 +241,36 @@ html {
   display: block;
 }
 
+/* ===== RESPONSIVE ===== */
+@media (max-width:800px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #f8f8f8;
+    padding: 10px 0;
+    position: absolute;
+    top: 56px;
+    left: 0;
+  }
+
+  .nav-toggle {
+    display: inline-block;
+    background: none;
+    border: 0;
+    font-size: 22px;
+  }
+
+  .nav-menu li { width: 100%; }
+
+  .nav-menu a { display: block; padding: 12px 20px; }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    min-width: auto;
+    padding-left: 0;
+  }
+
+  .dropdown-menu li a { padding-left: 30px; }
+}
