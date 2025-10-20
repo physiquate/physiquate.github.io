@@ -273,39 +273,33 @@ document.addEventListener('DOMContentLoaded', function(){
     resultDiv.scrollIntoView({behavior:"smooth"});
 
     // ===== Send exam answers to Google Sheets =====
-    const answers = questionsArray.map((item,index)=>{
+  
+    // Prepare answers array
+    let answers = [];
+    questionsArray.forEach((item,index)=>{
       const qDiv = document.getElementById(`q${index+1}`);
       const selected = qDiv.querySelector('input[type="radio"]:checked');
-      const userAnswer = selected ? parseInt(selected.value) : -1;
-      return {
-        question: item.q,
-        selectedOption: userAnswer===-1 ? "Not Answered" : item.options[userAnswer],
-        correctAnswer: item.options[item.answer],
-        status: userAnswer===item.answer ? "Correct" : "Incorrect"
-      };
+      const userAnswer = selected ? parseInt(selected.value):-1;
+      answers.push(userAnswer);
     });
     
-    // Prepare payload
-    const payload = {
-      name: document.getElementById('student-name').value.trim(),
-      email: document.getElementById('student-email').value.trim(),
-      examTitle: document.getElementById('exam-title').value.trim(),
-      timestamp: new Date().toLocaleString(),
-      score: score,
-      percentage: percentage,
-      grade: grade,
-      answers: answers
-    };
-    
     // Send to Google Sheets
-    fetch("https://script.google.com/macros/s/AKfycbycQvB0L2aMVdHotPEGOP4oR21xU66cnX1l75YpGtRhysVm9WHAajk1Uxr_eSsy-OkT/execc", { // <-- Replace with your Web App URL
+    fetch("https://script.google.com/macros/s/AKfycbycQvB0L2aMVdHotPEGOP4oR21xU66cnX1l75YpGtRhysVm9WHAajk1Uxr_eSsy-OkT/execc", {  // Replace with Web App URL
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        name: document.getElementById('student-name').value,
+        email: document.getElementById('student-email').value,
+        title: document.getElementById('exam-title').value,
+        score: score,
+        percentage: percentage,
+        grade: grade,
+        answers: answers
+      })
     })
     .then(res => res.json())
-    .then(data => console.log("Exam answers saved:", data))
-    .catch(err => console.error("Error saving exam answers:", err));
+    .then(data => console.log("Saved to Google Sheets:", data))
+    .catch(err => console.error("Error saving data:", err));
 
     // Re-render math in results
     MathJax.typesetPromise();
@@ -316,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
