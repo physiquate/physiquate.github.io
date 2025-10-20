@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function(){
        
   // ===== Send student details to Google Sheets =====
   const timestamp = new Date().toLocaleString(); // optional if you want
-  fetch("https://script.google.com/macros/s/AKfycbycQvB0L2aMVdHotPEGOP4oR21xU66cnX1l75YpGtRhysVm9WHAajk1Uxr_eSsy-OkT/exec", { // <-- Replace with your Web App URL
+  fetch("https://script.google.com/macros/s/AKfycbxZNqGSkBvQ2WvcJRERCgCDSYUiam9oDWo0klYpIrJO-77uyxW2p4hPeQ5tLavuuhR5/exec", { // <-- Replace with your Web App URL
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     
     // Send to Google Sheets
-    fetch("https://script.google.com/macros/s/AKfycbycQvB0L2aMVdHotPEGOP4oR21xU66cnX1l75YpGtRhysVm9WHAajk1Uxr_eSsy-OkT/exec", {  // Replace with Web App URL
+    fetch("https://script.google.com/macros/s/AKfycbxZNqGSkBvQ2WvcJRERCgCDSYUiam9oDWo0klYpIrJO-77uyxW2p4hPeQ5tLavuuhR5/exec", {  // Replace with Web App URL
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -310,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
