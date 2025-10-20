@@ -111,48 +111,72 @@
   </div>
 
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function(){
 
-  // =============================================== Step 1: Questions Array (can include LaTeX) ======================================================
-  const questionsArray = [
-      { q: "If a force $\\vec{F}$ is derivable from a potential function $V(r)$, where $r$ is the distance from the origin. It follows that", 
+  // ===== Step 1: Questions Array =====
+  let questionsArray = [
+    { q: "If a force $\\vec{F}$ is derivable from a potential function $V(r)$, where $r$ is the distance from the origin. It follows that", 
       options: ["&nabla; &times; F = 0","&nabla; &sdot; F = 0","$\\vec&nabla; V = 0$","$\\vec&nabla;^2 V = 0$"], 
       answer: 2 
-      },
-      { q: "The unit vector normal to the surface $𝐱^𝟐+𝐲^𝟐−𝒛 =𝟏$ at the point (1,1,1) is", 
+    },
+    { q: "The unit vector normal to the surface $𝐱^𝟐+𝐲^𝟐−𝒛 =𝟏$ at the point (1,1,1) is", 
       options: ["$(\\hat{i} + \\hat{j} - \\hat{k})/\\sqrt{3}$","$ (2\\hat{i} + \\hat{j} - \\hat{k})/\\sqrt{6} $","$ (\\hat{i} + 2\\hat{j} - \\hat{k})/\\sqrt{6} $","$ (2\\hat{i} + 2\\hat{j} - \\hat{k})/3 $"],
       answer: 0 
-      },
-      { q: "Identify the correct statement for the following a = 3i + 2 j and b = i + 2 j",
+    },
+    { q: "Identify the correct statement for the following a = 3i + 2 j and b = i + 2 j",
       options: ["The vectors a and b are linearly Independent","The vectors a and b are linearly dependent","The vectors a and b are orthogonal","The vectors a and b are normalized"], 
       answer: 0 
-      },
-      { q: "If A and B are constant vectors. Then $∇(𝑨.(𝑩 × 𝒓))$ is", 
-      options: [" 𝐴 . 𝐵"," 𝐴×𝐵"," r"," Zero"], 
+    },
+    { q: "If A and B are constant vectors. Then $∇(𝑨.(𝑩 × 𝒓))$ is", 
+      options: ["𝐴 . 𝐵","𝐴×𝐵","r","Zero"], 
       answer: 3 
-      }, 
-      { q: "The unit vector perpendicular to the surface $ x^2 + y^2  +z^2 = 3$ at the point (1, 1, 1) is", 
+    },
+    { q: "The unit vector perpendicular to the surface $ x^2 + y^2  +z^2 = 3$ at the point (1, 1, 1) is", 
       options: ["$\\frac{\\hat{x} + \\hat{y} - \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} - \\hat{y} - \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} - \\hat{y} + \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} +\\hat{y} + \\hat{z}}{\\sqrt{3}}$"], 
       answer: 3 
-      } 
+    }
   ];
-  // =============================================== Step 1: Questions Array (can include LaTeX) ======================================================
 
-  // ===== Step 2: Generate Questions Dynamically =====
+  // ===== Step 2: Shuffle Array Function =====
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+  // ===== Step 3: Shuffle questions =====
+  shuffleArray(questionsArray);
+
+  // ===== Step 4: Shuffle options per question =====
+  questionsArray.forEach(q => {
+    const originalAnswer = q.answer;
+    // Create array of option indices
+    const optionIndices = q.options.map((_,i) => i);
+    shuffleArray(optionIndices);
+
+    // Rearrange options
+    const shuffledOptions = optionIndices.map(i => q.options[i]);
+    q.options = shuffledOptions;
+
+    // Update correct answer index
+    q.answer = optionIndices.indexOf(originalAnswer);
+  });
+
+  // ===== Step 5: Generate Questions Dynamically =====
   const examDiv = document.getElementById('exam');
   questionsArray.forEach((item,index)=>{
-    const qDiv = document.createElement('div'); // Question container
+    const qDiv = document.createElement('div'); 
     qDiv.classList.add('question');
-    if(index===0) qDiv.classList.add('active'); // first question active
+    if(index===0) qDiv.classList.add('active'); 
     qDiv.id = `q${index+1}`;
 
-    const p = document.createElement('p'); // Question text
-    p.innerHTML = `${index+1}. ${item.q}`; // innerHTML allows LaTeX
+    const p = document.createElement('p'); 
+    p.innerHTML = `${index+1}. ${item.q}`; 
     qDiv.appendChild(p);
 
-    const optionsDiv = document.createElement('div'); // Options container
+    const optionsDiv = document.createElement('div'); 
     optionsDiv.classList.add('options');
     item.options.forEach((opt,i)=>{
       const label = document.createElement('label');
@@ -161,12 +185,11 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     qDiv.appendChild(optionsDiv);
 
-    // Insert question above navigation buttons
     const navigationDiv = examDiv.querySelector('.navigation');
     examDiv.insertBefore(qDiv, navigationDiv);
   });
 
-  // ===== Step 3: Start Exam Logic =====
+  // ===== Step 6: Start Exam Logic =====
   const studentForm = document.getElementById('student-form');
   const startBtn = document.getElementById('start-exam');
   const timerDisplay = document.getElementById('timer');
@@ -174,15 +197,10 @@ document.addEventListener('DOMContentLoaded', function(){
   let countdown;
 
   startBtn.addEventListener('click', ()=>{
-    const nameInput = document.getElementById('student-name');
-    const emailInput = document.getElementById('student-email');
-    const titleInput = document.getElementById('exam-title');
+    const name = document.getElementById('student-name').value.trim();
+    const email = document.getElementById('student-email').value.trim();
+    const title = document.getElementById('exam-title').value.trim();
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const title = titleInput.value.trim();
-
-    // Validation
     if(!name){ alert("Name required"); return; }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(!email || !emailPattern.test(email)){ alert("Valid email required"); return; }
@@ -191,26 +209,8 @@ document.addEventListener('DOMContentLoaded', function(){
     studentInfo.innerHTML = `<strong>Name:</strong> ${name} | <strong>Email:</strong> ${email} | <strong>Exam:</strong> ${title}`;
     studentForm.style.display='none';
     examDiv.style.display='block';
-       
-  // ===== Send student details to Google Sheets =====
-  const timestamp = new Date().toLocaleString(); // optional if you want
-  fetch("https://script.google.com/macros/s/AKfycbxZNqGSkBvQ2WvcJRERCgCDSYUiam9oDWo0klYpIrJO-77uyxW2p4hPeQ5tLavuuhR5/exec", { // <-- Replace with your Web App URL
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: name,
-      email: email,
-      title: title,
-      time: timestamp
-    })
-  })
-  .then(res => res.json())
-  .then(data => console.log("Saved to Google Sheets:", data))
-  .catch(err => console.error("Error saving data:", err));
 
-
-
-    // ===================================================Timer (1 hour) ================================================================================
+    // Timer (1 hour)
     let time = 60*60;
     countdown = setInterval(()=>{
       let minutes = Math.floor(time/60);
@@ -223,12 +223,11 @@ document.addEventListener('DOMContentLoaded', function(){
         submitExam();
       }
     },1000);
-     // ===================================================Timer (1 hour) ================================================================================
-    // Render MathJax initially
+
     MathJax.typesetPromise();
   });
 
-  // ===== Step 4: Navigation =====
+  // ===== Step 7: Navigation =====
   const questions = document.querySelectorAll('.question');
   const prevBtn = document.getElementById('prev');
   const nextBtn = document.getElementById('next');
@@ -240,14 +239,14 @@ document.addEventListener('DOMContentLoaded', function(){
     prevBtn.disabled = index===0;
     nextBtn.style.display = index===questions.length-1?'none':'inline-block';
     submitBtn.style.display = index===questions.length-1?'block':'none';
-    MathJax.typesetPromise(); // Re-render math for current question
+    MathJax.typesetPromise();
   }
 
   nextBtn.addEventListener('click', ()=>{ if(current<questions.length-1){ current++; showQuestion(current); } });
   prevBtn.addEventListener('click', ()=>{ if(current>0){ current--; showQuestion(current); } });
   showQuestion(current);
 
-  // ===== Step 5: Submit Exam =====
+  // ===== Step 8: Submit Exam =====
   const resultDiv = document.getElementById('result');
   const scoreSummary = document.getElementById('score-summary');
   const tbody = document.querySelector("#result-table tbody");
@@ -289,51 +288,23 @@ document.addEventListener('DOMContentLoaded', function(){
     examDiv.style.display='none';
     resultDiv.style.display='block';
     resultDiv.scrollIntoView({behavior:"smooth"});
-
-    // ===== Send exam answers to Google Sheets =====
-  
-    // Prepare answers array
-    let answers = [];
-    questionsArray.forEach((item,index)=>{
-      const qDiv = document.getElementById(`q${index+1}`);
-      const selected = qDiv.querySelector('input[type="radio"]:checked');
-      const userAnswer = selected ? parseInt(selected.value):-1;
-      answers.push(userAnswer);
-    });
-    
-    // Send to Google Sheets
-    fetch("https://script.google.com/macros/s/AKfycbxZNqGSkBvQ2WvcJRERCgCDSYUiam9oDWo0klYpIrJO-77uyxW2p4hPeQ5tLavuuhR5/exec", {  // Replace with Web App URL
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: document.getElementById('student-name').value,
-        email: document.getElementById('student-email').value,
-        title: document.getElementById('exam-title').value,
-        score: score,
-        percentage: percentage,
-        grade: grade,
-        answers: answers
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log("Saved to Google Sheets:", data))
-    .catch(err => console.error("Error saving data:", err));
-
-    // Re-render math in results
     MathJax.typesetPromise();
   }
-    // Home button: go to homepage
+
+  // ===== Step 9: Home Button =====
   const homeBtn = document.getElementById('home-btn');
   if (homeBtn) {
     homeBtn.addEventListener('click', function() {
       window.location.href = 'index.html';
     });
   }
+
 });
 </script>
 
 </body>
 </html>
+
 
 
 
