@@ -42,5 +42,19 @@
       if (target) target.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
     });
   }
+  // ===== COLLAPSIBLE SECTIONS =====
+  document.addEventListener("DOMContentLoaded", function() {
+    const collapsibles = document.querySelectorAll(".collapsible");
+    
+    collapsibles.forEach(button => {
+      button.addEventListener("click", function() {
+        this.classList.toggle("active");
+        
+        const content = this.nextElementSibling;
+        content.classList.toggle("show");
+      });
+    });
+  });
+
 
 })(); // ← End of IIFE
