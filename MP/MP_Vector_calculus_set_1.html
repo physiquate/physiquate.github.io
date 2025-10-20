@@ -11,33 +11,23 @@
   header { position: sticky; top:0; background-color: #2196f3; color:white; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; z-index:100; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
   header h1 { font-size: 20px; margin:0; }
   .timer { font-weight:bold; }
-
   .container { max-width:800px; margin:40px auto; background-color:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-
-  /* Form Inputs */
   .form-group { margin-bottom:15px; }
   .form-group label { display:block; font-weight:bold; margin-bottom:5px; }
   .form-group input { width:100%; padding:8px; border-radius:5px; border:1px solid #ccc; }
-
-  /* Buttons */
   .btn, .nav-btn, .submit-btn { padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:0.3s; }
   .btn, .nav-btn { background-color:#2196f3; color:white; }
   .btn:hover, .nav-btn:hover { background-color:#1976d2; }
   .nav-btn:disabled { background-color:#90caf9; cursor:not-allowed; }
   .submit-btn { background-color:#4caf50; width:100%; margin-top:20px; color:white; }
   .submit-btn:hover { background-color:#388e3c; }
-
-  /* Questions & Options */
   .question { display:none; }
   .question.active { display:block; }
   .question p { font-weight:bold; }
   .options label { display:block; padding:10px; margin:6px 0; background-color:#f9f9f9; border-radius:5px; cursor:pointer; transition:0.3s; }
   .options label:hover { background-color:#e0f7fa; }
   input[type="radio"] { margin-right:10px; }
-
   .navigation { margin-top:20px; display:flex; justify-content:space-between; }
-
-  /* Result table */
   .result { display:none; margin-top:30px; background-color:#f1f8e9; padding:20px; border-radius:10px; }
   .result h2 { color:#2e7d32; margin-top:0; }
   table { width:100%; border-collapse:collapse; margin-top:15px; }
@@ -53,7 +43,6 @@
 </head>
 <body>
 
-<!-- ===== Header with Timer ===== -->
 <header>
   <h1>Physiquate Exam Portal</h1>
   <div class="timer" id="timer">00:00</div>
@@ -61,7 +50,6 @@
 
 <div class="container">
 
-  <!-- ===== Step 1: Student Details ===== -->
   <div id="student-form">
     <h2>Enter Your Details</h2>
     <div class="form-group">
@@ -79,7 +67,6 @@
     <button class="btn" id="start-exam">Start Exam</button>
   </div>
 
-  <!-- ===== Step 2: Exam Questions ===== -->
   <div id="exam" style="display:none;">
     <div class="navigation">
       <button type="button" class="nav-btn" id="prev">Previous</button>
@@ -88,7 +75,6 @@
     <button type="button" class="submit-btn" id="submit-btn" style="display:none;">Submit Exam</button>
   </div>
 
-  <!-- ===== Step 3: Results ===== -->
   <div class="result" id="result">
     <h2>Exam Report</h2>
     <p id="student-info"></p>
@@ -112,42 +98,47 @@
 <script>
 document.addEventListener('DOMContentLoaded', function(){
 
-  // ===== Step 1: Questions Array (can include LaTeX) =====
-  const questionsArray = [
-      { q: "If a force $\\vec{F}$ is derivable from a potential function $V(r)$, where $r$ is the distance from the origin. It follows that", 
-      options: ["&nabla; &times; F = 0","&nabla; &sdot; F = 0","$\\vec&nabla; V = 0$","$\\vec&nabla;^2 V = 0$"], 
-      answer: 2 },
-      { q: "The unit vector normal to the surface $𝐱^𝟐+𝐲^𝟐−𝒛 =𝟏$ at the point (1,1,1) is", 
-      options: ["$(\\hat{i} + \\hat{j} - \\hat{k})/\\sqrt{3}$","$ (2\\hat{i} + \\hat{j} - \\hat{k})/\\sqrt{6} $","$ (\\hat{i} + 2\\hat{j} - \\hat{k})/\\sqrt{6} $","$ (2\\hat{i} + 2\\hat{j} - \\hat{k})/3 $"],
-      answer: 0 },
-      { q: "Identify the correct statement for the following a = 3i + 2 j and b = i + 2 j",
-      options: ["The vectors a and b are linearly Independent","The vectors a and b are linearly dependent","The vectors a and b are orthogonal","The vectors a and b are normalized"], 
-      answer: 0 },
-      { q: "If A and B are constant vectors. Then $∇(𝑨.(𝑩 × 𝒓))$ is", 
-      options: [" 𝐴 . 𝐵"," 𝐴×𝐵"," r"," Zero"], 
-      answer: 3 }, 
-      { q: "The unit vector perpendicular to the surface $ x^2 + y^2  +z^2 = 3$ at the point (1, 1, 1) is", 
-      options: ["$\\frac{\\hat{x} + \\hat{y} - \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} - \\hat{y} - \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} - \\hat{y} + \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} +\\hat{y} + \\hat{z}}{\\sqrt{3}}$"], 
-      answer: 3 }
-  ];
-
-  // ===== SHUFFLE QUESTIONS & OPTIONS =====
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+  // ===== Helper function to shuffle array =====
+  function shuffleArray(array){
+    for(let i=array.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   }
 
-  // Shuffle questions
-  shuffleArray(questionsArray);
+  // ===== Step 1: Questions Array (inline LaTeX fixed) =====
+  let questionsArray = [
+    { q: "If a force \\(\\vec{F}\\) is derivable from a potential function \\(V(r)\\), where \\(r\\) is the distance from the origin. It follows that", 
+      options: ["\\(\\nabla \\times F = 0\\)","\\(\\nabla \\cdot F = 0\\)","\\(\\vec\\nabla V = 0\\)","\\(\\vec\\nabla^2 V = 0\\)"], 
+      answer: 2 
+    },
+    { q: "The unit vector normal to the surface \\(x^2+y^2-z=1\\) at the point (1,1,1) is", 
+      options: ["\\((\\hat{i}+\\hat{j}-\\hat{k})/\\sqrt{3}\\)","\\((2\\hat{i}+\\hat{j}-\\hat{k})/\\sqrt{6}\\)","\\((\\hat{i}+2\\hat{j}-\\hat{k})/\\sqrt{6}\\)","\\((2\\hat{i}+2\\hat{j}-\\hat{k})/3\\)"],
+      answer: 0 
+    },
+    { q: "Identify the correct statement for the following \\(a = 3i + 2j\\) and \\(b = i + 2j\\)", 
+      options: ["The vectors a and b are linearly Independent","The vectors a and b are linearly dependent","The vectors a and b are orthogonal","The vectors a and b are normalized"], 
+      answer: 0 
+    },
+    { q: "If A and B are constant vectors, then \\(\\nabla(A \\cdot (B \\times r))\\) is", 
+      options: ["A \\(\\cdot\\) B","A \\(\\times\\) B","r","Zero"], 
+      answer: 3 
+    },
+    { q: "The unit vector perpendicular to the surface \\(x^2+y^2+z^2=3\\) at the point (1,1,1) is", 
+      options: ["\\((\\hat{x}+\\hat{y}-\\hat{z})/\\sqrt{3}\\)","\\((\\hat{x}-\\hat{y}-\\hat{z})/\\sqrt{3}\\)","\\((\\hat{x}-\\hat{y}+\\hat{z})/\\sqrt{3}\\)","\\((\\hat{x}+\\hat{y}+\\hat{z})/\\sqrt{3}\\)"], 
+      answer: 3 
+    } 
+  ];
 
-  // Shuffle options for each question and fix answer index
-  questionsArray.forEach(q => {
-    const correctAnswerValue = q.options[q.answer];
-    shuffleArray(q.options);
-    q.answer = q.options.indexOf(correctAnswerValue);
+  // ===== Shuffle questions =====
+  questionsArray = shuffleArray(questionsArray);
+
+  // ===== Shuffle options for each question =====
+  questionsArray.forEach(q=>{
+    const correctValue = q.options[q.answer];
+    q.options = shuffleArray(q.options);
+    q.answer = q.options.indexOf(correctValue);
   });
 
   // ===== Step 2: Generate Questions Dynamically =====
@@ -183,14 +174,9 @@ document.addEventListener('DOMContentLoaded', function(){
   let countdown;
 
   startBtn.addEventListener('click', ()=>{
-    const nameInput = document.getElementById('student-name');
-    const emailInput = document.getElementById('student-email');
-    const titleInput = document.getElementById('exam-title');
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const title = titleInput.value.trim();
-
+    const name = document.getElementById('student-name').value.trim();
+    const email = document.getElementById('student-email').value.trim();
+    const title = document.getElementById('exam-title').value.trim();
     if(!name){ alert("Name required"); return; }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(!email || !emailPattern.test(email)){ alert("Valid email required"); return; }
@@ -200,23 +186,21 @@ document.addEventListener('DOMContentLoaded', function(){
     studentForm.style.display='none';
     examDiv.style.display='block';
 
-    const timestamp = new Date().toLocaleString();
-    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_URL/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, title, time: timestamp })
-    }).then(res => res.json()).then(data => console.log("Saved:", data)).catch(err => console.error(err));
+    MathJax.typesetPromise();
 
+    // Timer
     let time = 60*60;
     countdown = setInterval(()=>{
       let minutes = Math.floor(time/60);
       let seconds = time%60;
       timerDisplay.textContent = `${minutes}:${seconds<10?'0'+seconds:seconds}`;
       time--;
-      if(time<0){ clearInterval(countdown); alert("Time is up! Exam submitted."); submitExam(); }
+      if(time<0){
+        clearInterval(countdown);
+        alert("Time is up! Exam submitted.");
+        submitExam();
+      }
     },1000);
-
-    MathJax.typesetPromise();
   });
 
   // ===== Step 4: Navigation =====
@@ -281,25 +265,6 @@ document.addEventListener('DOMContentLoaded', function(){
     resultDiv.style.display='block';
     resultDiv.scrollIntoView({behavior:"smooth"});
 
-    let answers = [];
-    questionsArray.forEach((item,index)=>{
-      const qDiv = document.getElementById(`q${index+1}`);
-      const selected = qDiv.querySelector('input[type="radio"]:checked');
-      const userAnswer = selected ? parseInt(selected.value):-1;
-      answers.push(userAnswer);
-    });
-
-    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_URL/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: document.getElementById('student-name').value,
-        email: document.getElementById('student-email').value,
-        title: document.getElementById('exam-title').value,
-        score, percentage, grade, answers
-      })
-    }).then(res => res.json()).then(data => console.log("Saved:", data)).catch(err => console.error(err));
-
     MathJax.typesetPromise();
   }
 
@@ -309,8 +274,8 @@ document.addEventListener('DOMContentLoaded', function(){
       window.location.href = 'index.html';
     });
   }
+
 });
 </script>
-
 </body>
 </html>
