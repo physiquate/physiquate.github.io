@@ -272,6 +272,41 @@ document.addEventListener('DOMContentLoaded', function(){
     resultDiv.style.display='block';
     resultDiv.scrollIntoView({behavior:"smooth"});
 
+    // ===== Send exam answers to Google Sheets =====
+    const answers = questionsArray.map((item,index)=>{
+      const qDiv = document.getElementById(`q${index+1}`);
+      const selected = qDiv.querySelector('input[type="radio"]:checked');
+      const userAnswer = selected ? parseInt(selected.value) : -1;
+      return {
+        question: item.q,
+        selectedOption: userAnswer===-1 ? "Not Answered" : item.options[userAnswer],
+        correctAnswer: item.options[item.answer],
+        status: userAnswer===item.answer ? "Correct" : "Incorrect"
+      };
+    });
+    
+    // Prepare payload
+    const payload = {
+      name: document.getElementById('student-name').value.trim(),
+      email: document.getElementById('student-email').value.trim(),
+      examTitle: document.getElementById('exam-title').value.trim(),
+      timestamp: new Date().toLocaleString(),
+      score: score,
+      percentage: percentage,
+      grade: grade,
+      answers: answers
+    };
+    
+    // Send to Google Sheets
+    fetch("YOUR_WEB_APP_URL", { // <-- Replace with your Web App URL
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => console.log("Exam answers saved:", data))
+    .catch(err => console.error("Error saving exam answers:", err));
+
     // Re-render math in results
     MathJax.typesetPromise();
   }
@@ -281,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
