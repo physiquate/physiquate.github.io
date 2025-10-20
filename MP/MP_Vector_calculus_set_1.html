@@ -109,26 +109,50 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // ===== Step 1: Questions Array (inline LaTeX fixed) =====
   let questionsArray = [
-    { q: "If a force \\(\\vec{F}\\) is derivable from a potential function \\(V(r)\\), where \\(r\\) is the distance from the origin. It follows that", 
-      options: ["\\(\\nabla \\times F = 0\\)","\\(\\nabla \\cdot F = 0\\)","\\(\\vec\\nabla V = 0\\)","\\(\\vec\\nabla^2 V = 0\\)"], 
+      { q: "If a force $\\vec{F}$ is derivable from a potential function $V(r)$, where $r$ is the distance from the origin. It follows that", 
+      options: ["&nabla; &times; F = 0","&nabla; &sdot; F = 0","$\\vec&nabla; V = 0$","$\\vec&nabla;^2 V = 0$"], 
       answer: 2 
-    },
-    { q: "The unit vector normal to the surface \\(x^2+y^2-z=1\\) at the point (1,1,1) is", 
-      options: ["\\((\\hat{i}+\\hat{j}-\\hat{k})/\\sqrt{3}\\)","\\((2\\hat{i}+\\hat{j}-\\hat{k})/\\sqrt{6}\\)","\\((\\hat{i}+2\\hat{j}-\\hat{k})/\\sqrt{6}\\)","\\((2\\hat{i}+2\\hat{j}-\\hat{k})/3\\)"],
+      },
+      { q: "The unit vector normal to the surface $𝐱^𝟐+𝐲^𝟐−𝒛 =𝟏$ at the point (1,1,1) is", 
+      options: ["$(\\hat{i} + \\hat{j} - \\hat{k})/\\sqrt{3}$","$ (2\\hat{i} + \\hat{j} - \\hat{k})/\\sqrt{6} $","$ (\\hat{i} + 2\\hat{j} - \\hat{k})/\\sqrt{6} $","$ (2\\hat{i} + 2\\hat{j} - \\hat{k})/3 $"],
       answer: 0 
-    },
-    { q: "Identify the correct statement for the following \\(a = 3i + 2j\\) and \\(b = i + 2j\\)", 
+      },
+      { q: "Identify the correct statement for the following a = 3i + 2 j and b = i + 2 j",
       options: ["The vectors a and b are linearly Independent","The vectors a and b are linearly dependent","The vectors a and b are orthogonal","The vectors a and b are normalized"], 
       answer: 0 
-    },
-    { q: "If A and B are constant vectors, then \\(\\nabla(A \\cdot (B \\times r))\\) is", 
-      options: ["A \\(\\cdot\\) B","A \\(\\times\\) B","r","Zero"], 
+      },
+      { q: "If A and B are constant vectors. Then $∇(𝑨.(𝑩 × 𝒓))$ is", 
+      options: [" 𝐴 . 𝐵"," 𝐴×𝐵"," r"," Zero"], 
       answer: 3 
-    },
-    { q: "The unit vector perpendicular to the surface \\(x^2+y^2+z^2=3\\) at the point (1,1,1) is", 
-      options: ["\\((\\hat{x}+\\hat{y}-\\hat{z})/\\sqrt{3}\\)","\\((\\hat{x}-\\hat{y}-\\hat{z})/\\sqrt{3}\\)","\\((\\hat{x}-\\hat{y}+\\hat{z})/\\sqrt{3}\\)","\\((\\hat{x}+\\hat{y}+\\hat{z})/\\sqrt{3}\\)"], 
+      }, 
+      { q: "The unit vector perpendicular to the surface $ x^2 + y^2  +z^2 = 3$ at the point (1, 1, 1) is", 
+      options: ["$\\frac{\\hat{x} + \\hat{y} - \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} - \\hat{y} - \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} - \\hat{y} + \\hat{z}}{\\sqrt{3}}$","$\\frac{\\hat{x} +\\hat{y} + \\hat{z}}{\\sqrt{3}}$"], 
       answer: 3 
-    } 
+      }, 
+      { q: "The direction of $\\vec{\\nabla} F$ for a scalar field $f(x,y,z)=\\frac{1}{2} x^2-xy+\\frac{1}{2} z^2$ at the point $(1,1,2)$ is", 
+      options: ["$\\frac{-\\hat{j} - \\hat{2k}}{\\sqrt{5}}$","$\\frac{-\\hat{j} +\\hat{k}}{\\sqrt{5}}$","$\\frac{\\hat{j} -\\hat{2k}}{\\sqrt{5}}$","$\\frac{\\hat{j} + \\hat{2k}}{\\sqrt{5}}$"], 
+      answer: 1 
+      },
+      { q: "In spherical polar coordinates $(r,𝜽, 𝝋)$. the unit vector $\\hat{𝜽}$ at $(10,𝝅/4,𝝅//2)$ is", 
+      options: ["$\\hat{k}$","$\\frac{1}{\\sqrt{2}}(\\hat{j} +\\hat{k})$","$\\frac{1}{\\sqrt{2}}(-\\hat{j} +\\hat{k})$","$\\frac{1}{\\sqrt{2}}(\\hat{j} -\\hat{k})$"], 
+      answer: 3 
+      },
+      { q: "Given $\\hat{V_1}=\\hat{i}-\\hat{j}$ and $\\hat{V_2}=-2\\hat{i}+3\\hat{j}+2\\hat{k}$ which one of the following makes $\\hat{V_3}$ makes ($\\hat{V_1}, \\hat{V_2}, \\hat{V_3}$) a complete set for a three-dimensional real linear vector space?",
+      options: ["$\\hat{V_3}=\\hat{i}+ \\hat{j}+4\\hat{k}$","$\\hat{V_3}=2\\hat{i}- \\hat{j}+2\\hat{k}$","$\\hat{V_3}=\\hat{i}+ 2\\hat{j}+6\\hat{k}$","$\\hat{V_3}=2\\hat{i}+ \\hat{j}+4\\hat{k}$"], 
+      answer: 3 
+      },
+      { q: "Consider the set of vectors $\\frac{1}{\\sqrt{2}}(1,1,0)$, $\\frac{1}{\\sqrt{2}}(0,1,1)$, and $\\frac{1}{\\sqrt{2}}(1,0,1)$. These 3 vectors are:",
+      options: ["Linearly independent$","Cannot form a basis in 3D real vector space$","orthonormal","$\\frac{1}{\\sqrt{2}}(1,1,0)$  can be written as linear contribution of $\\frac{1}{\\sqrt{2}}(0,1,1)$, and $\\frac{1}{\\sqrt{2}}(1,0,1)$"], 
+      answer: 0 
+      }, 
+      { q: "If $\\vec{A}=x\\hat{e_x}+y\\hat{e_y}+z\\hat{e_z}$, then $\\nabla^2 \\cdot \\vec{A}$ is",
+      options: ["$1$","$0$","$3$","$-3$"], 
+      answer: 1 
+      }, 
+      { q: "If $\\vec{A}=x\\hat{e_x}+y\\hat{e_y}+z\\hat{e_z}$, then $\\nabla^2 \\cdot \\vec{A}$ is",
+      options: ["$1$","$0$","$3$","$-3$"], 
+      answer: 1 
+      }, 
   ];
 
   // ===== Shuffle questions =====
@@ -279,3 +303,4 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 </body>
 </html>
+
