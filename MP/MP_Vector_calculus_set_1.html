@@ -174,11 +174,22 @@ document.addEventListener('DOMContentLoaded', function(){
     studentForm.style.display='none';
     examDiv.style.display='block';
        
-    // ===== Save student details in LocalStorage =====
-    const timestamp = new Date().toLocaleString();
-    let examEntries = JSON.parse(localStorage.getItem('examEntries') || '[]');
-    examEntries.push({ name: name, email: email, title: title, time: timestamp });
-    localStorage.setItem('examEntries', JSON.stringify(examEntries));
+  // ===== Send student details to Google Sheets =====
+  const timestamp = new Date().toLocaleString(); // optional if you want
+  fetch("YOUR_WEB_APP_URL", { // <-- Replace with your Web App URL
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      title: title,
+      time: timestamp
+    })
+  })
+  .then(res => res.json())
+  .then(data => console.log("Saved to Google Sheets:", data))
+  .catch(err => console.error("Error saving data:", err));
+
 
 
     // ===================================================Timer (1 hour) ================================================================================
@@ -270,6 +281,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
 
