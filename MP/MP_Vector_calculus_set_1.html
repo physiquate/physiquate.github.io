@@ -107,7 +107,7 @@
       <tbody></tbody>
     </table>
     <!-- Home Button -->
-    <button class="btn" id="home-btn" style="margin-top:20px;">Home</button>
+    <button class="submit-btn" id="home-btn" style="width:auto; padding:10px 18px; margin-top:20px;">Home</button>
   </div>
 
 </div>
@@ -306,12 +306,19 @@ document.addEventListener('DOMContentLoaded', function(){
     // Re-render math in results
     MathJax.typesetPromise();
   }
-
+    // Home button: go to homepage
+  const homeBtn = document.getElementById('home-btn');
+  if (homeBtn) {
+    homeBtn.addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  }
 });
 </script>
 
 </body>
 </html>
+
 
 
 
