@@ -113,13 +113,14 @@
 <script>
 document.addEventListener('DOMContentLoaded', function(){
 
-  // ===== Step 1: Questions Array (can include LaTeX) =====
+  // =============================================== Step 1: Questions Array (can include LaTeX) ======================================================
   const questionsArray = [
     { q: "What is the speed of light in vacuum? c", options: ["$$3 x 10^8 m/s$$","$$1.5 x 10^8 m/s$$","$$3 x 10^6 m/s$$","$$1 x 10^9 m/s$$"], answer: 0 },
     { q: "Who proposed the theory of relativity?", options: ["Isaac Newton","Albert Einstein","Niels Bohr","James Clerk Maxwell"], answer: 1 },
     { q: "Electric current $I$ is measured in?", options: ["Volt","Ampere","Ohm","Watt"], answer: 1 },
     { q: "Solve $$\\int_0^1 x^2 dx$$", options: ["1/2","1/3","1","2/3"], answer: 1 } // Example math question
   ];
+  // =============================================== Step 1: Questions Array (can include LaTeX) ======================================================
 
   // ===== Step 2: Generate Questions Dynamically =====
   const examDiv = document.getElementById('exam');
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function(){
     studentForm.style.display='none';
     examDiv.style.display='block';
 
-    // Timer (1 hour)
+    // ===================================================Timer (1 hour) ================================================================================
     let time = 60*60;
     countdown = setInterval(()=>{
       let minutes = Math.floor(time/60);
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function(){
         submitExam();
       }
     },1000);
-
+     // ===================================================Timer (1 hour) ================================================================================
     // Render MathJax initially
     MathJax.typesetPromise();
   });
@@ -262,5 +263,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
 
 
