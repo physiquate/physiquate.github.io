@@ -250,3 +250,41 @@
     border-bottom: 1px solid #ddd;
   }
 }
+/* ===== COLLAPSIBLE SECTION ===== */
+.collapsible {
+  background-color: var(--accent);
+  color: var(--light);
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.collapsible:hover {
+  background-color: #1f2e3a;
+}
+
+.collapsible.active {
+  background-color: #3c4a58;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border-left: 2px solid var(--accent);
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.content.show {
+  display: block;
+}
+
