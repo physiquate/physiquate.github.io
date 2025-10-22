@@ -682,9 +682,29 @@ function renderMath() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(!email || !emailPattern.test(email)){ alert('Valid email required'); return; }
     if(!title){ alert('Exam title required'); return; }
-
+  
     headerExamTitle.innerText = title;
     studentInfoP.innerHTML = `<strong>Name:</strong> ${name} | <strong>Email:</strong> ${email} | <strong>Exam:</strong> ${title}`;
+  
+    // ===== Send start event to Google Sheet =====
+    try {
+      saveExamData({
+        name: name,
+        email: email,
+        exam: title,
+        score: "",
+        total: "",
+        correct: "",
+        incorrect: "",
+        unanswered: "",
+        status: "Started",
+        time: new Date().toLocaleString()
+      });
+    } catch (e) {
+      console.error("start save failed", e);
+    }
+    // =============================================
+  
     // show exam area
     studentForm.style.display = 'none';
     examArea.style.display = 'block';
@@ -694,6 +714,7 @@ function renderMath() {
     document.getElementById('duration-text').innerText = '30 minutes';
     startTimer(30*60); // change 60 to desired total seconds, e.g., 3600 for 1 hour
   });
+
 
 
   // ========== Submit Exam Implementation ==========
@@ -791,6 +812,7 @@ async function saveExamData(payload) {
 
 </body>
 </html>
+
 
 
 
