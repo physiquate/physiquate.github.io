@@ -750,9 +750,29 @@ function renderMath() {
 
 }); // DOMContentLoaded
 </script>
+<script>
+/* ===== GOOGLE SHEET CONNECTION ===== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGd4EgTU-X1cSOEA0-P9JgLT-3vJf7nt0LQ0BQ6kre3DKJVJZLodGbXYTZ6d0MsSWw/exec";  // 👈 Replace with your real Apps Script URL
+
+// Function to send data to your Google Sheet
+async function saveExamData(payload) {
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",  // required for Apps Script endpoints
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    console.log("Data sent:", payload);
+  } catch (err) {
+    console.error("Error sending data:", err);
+  }
+}
+</script>
 
 </body>
 </html>
+
 
 
 
