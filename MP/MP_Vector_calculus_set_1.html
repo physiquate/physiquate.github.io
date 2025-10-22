@@ -265,50 +265,6 @@
   }
 
 </style>
-<script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwO66CHF2Tvl8A-qXLmvJI9DkoRSnr6lSpQC3Nfn5cR_JmDJmEti74IZ7h4I6je7Ak/exec"; // Replace with your URL
-
-// Example function that runs after exam submission
-function saveToGoogleSheet(studentData) {
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(studentData)
-  })
-  .then(() => console.log("Data sent to Google Sheet"))
-  .catch(err => console.error("Error:", err));
-}
-
-// Example usage after exam submission
-document.getElementById('submit-btn').addEventListener('click', function() {
-  const name = document.getElementById('student-name').value;
-  const email = document.getElementById('student-email').value;
-  const exam = document.getElementById('exam-title').value;
-  const score = calculateScore(); // you already have your logic in JS
-  const total = questionsArray.length;
-  const correct = score;
-  const incorrect = total - score;
-  const unanswered = 0; // modify if you track unanswered
-
-  const studentData = { name, email, exam, score, total, correct, incorrect, unanswered };
-
-  saveToGoogleSheet(studentData);
-});
-</script>
-
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)'], ['$', '$']],
-    displayMath: [['\\[','\\]']]
-  },
-  svg: { fontCache: 'global' }
-};
-</script>
-
 
 
 <!-- MathJax for LaTeX rendering -->
@@ -797,6 +753,7 @@ function renderMath() {
 
 </body>
 </html>
+
 
 
 
