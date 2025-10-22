@@ -385,6 +385,7 @@
 </main>
   
 // ===== GOOGLE SHEET SAVE HELPER =====
+<script>
 // Replace this with your deployed Apps Script Web App URL:
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGd4EgTU-X1cSOEA0-P9JgLT-3vJf7nt0LQ0BQ6kre3DKJVJZLodGbXYTZ6d0MsSWw/exec";
 
@@ -402,7 +403,7 @@ async function saveExamData(payload) {
     console.error("Error sending data to Google Sheet:", err);
   }
 }
-
+</script>
 <!-- ===== JavaScript: your original logic with only small adjustments ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', function(){
@@ -855,6 +856,7 @@ async function saveExamData(payload) {
 
 </body>
 </html>
+
 
 
 
