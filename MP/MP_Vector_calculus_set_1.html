@@ -688,28 +688,32 @@ function renderMath() {
     headerExamTitle.innerText = title;
     studentInfoP.innerHTML = `<strong>Name:</strong> ${name} | <strong>Email:</strong> ${email} | <strong>Exam:</strong> ${title}`;
   
-    // ===== Send start event to Google Sheet =====
+    // ===== Send final result to Google Sheet =====
+    const name = document.getElementById('student-name').value.trim();
+    const email = document.getElementById('student-email').value.trim();
+    const title = document.getElementById('exam-title').value.trim();
+    
     try {
       saveExamData({
         name: name,
         email: email,
         exam: title,
-        score: "",
-        total: "",
-        correct: "",
-        incorrect: "",
-        unanswered: "",
-        status: "Started",
+        score: score,
+        total: questionsArray.length,
+        correct: correctCount,
+        incorrect: incorrectCount,
+        unanswered: unansweredCount,
+        status: "Completed",
         time: new Date().toLocaleString()
       });
     } catch (e) {
-      console.error("start save failed", e);
+      console.error("final save failed", e);
     }
-    // =============================================
-  
-    // show exam area
-    studentForm.style.display = 'none';
-    examArea.style.display = 'block';
+    
+    // Show result div
+    examArea.style.display = 'none';
+    resultDiv.style.display = 'block';
+
     // show first question
     showQuestion(0);
     // start timer (set 1 minute for demo; change to desired seconds)
@@ -857,6 +861,7 @@ async function saveExamData(payload) {
 
 </body>
 </html>
+
 
 
 
