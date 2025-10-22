@@ -383,6 +383,25 @@
 
   </div> <!-- exam-wrap -->
 </main>
+  
+// ===== GOOGLE SHEET SAVE HELPER =====
+// Replace this with your deployed Apps Script Web App URL:
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGd4EgTU-X1cSOEA0-P9JgLT-3vJf7nt0LQ0BQ6kre3DKJVJZLodGbXYTZ6d0MsSWw/exec";
+
+async function saveExamData(payload) {
+  try {
+    // use no-cors to avoid CORS issues with simple Apps Script endpoint
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    console.log("Data sent to Google Sheet:", payload);
+  } catch (err) {
+    console.error("Error sending data to Google Sheet:", err);
+  }
+}
 
 <!-- ===== JavaScript: your original logic with only small adjustments ===== -->
 <script>
@@ -772,6 +791,7 @@ async function saveExamData(payload) {
 
 </body>
 </html>
+
 
 
 
