@@ -719,47 +719,90 @@ function renderMath() {
 
   // ========== Submit Exam Implementation ==========
   function submitExam(){
-    clearInterval(countdown);
-    // compute score
-    let score = 0;
-    const tbody = document.querySelector('#result-table tbody');
-    tbody.innerHTML = '';
-    questionsArray.forEach((item,index)=>{
-      const qDiv = document.getElementById(`q${index+1}`);
-      const selected = qDiv.querySelector('input[type="radio"]:checked');
-      const userAnswer = selected ? parseInt(selected.value) : -1;
-      const status = userAnswer === item.answer ? 'Correct' : 'Incorrect';
-      if(status === 'Correct') score++;
+  clearInterval(countdown);
 
-      const userText = userAnswer === -1 ? 'Not Answered' : item.options[userAnswer];
-      const correctText = item.options[item.answer];
+  // Counters
+  let score = 0;
+  let correctCount = 0;
+  let incorrectCount = 0;
+  let unansweredCount = 0;
 
-      tbody.innerHTML += `<tr>
-        <td style="max-width:300px; word-wrap:break-word;">${item.q}</td>
-        <td>${userText}</td>
-        <td>${correctText}</td>
-        <td style="font-weight:700; color:${status==='Correct'?'#166534':'#b91c1c'}">${status}</td>
-      </tr>`;
-      // Rerender MathJax for the new content
-      MathJax.typesetPromise([tbody]).catch((err) => console.error(err.message));
+  const tbody = document.querySelector('#result-table tbody');
+  tbody.innerHTML = '';
+
+  questionsArray.forEach((item,index)=>{
+    const qDiv = document.getElementById(`q${index+1}`);
+    const selected = qDiv.querySelector('input[type="radio"]:checked');
+    const userAnswer = selected ? parseInt(selected.value) : -1;
+    let statusText;
+    if(userAnswer === -1){
+      statusText = 'Not Answered';
+      unansweredCount++;
+    } else if(userAnswer === item.answer){
+      statusText = 'Correct';
+      correctCount++;
+      score++;
+    } else {
+      statusText = 'Incorrect';
+      incorrectCount++;
+    }
+
+    const userText = userAnswer === -1 ? 'Not Answered' : item.options[userAnswer];
+    const correctText = item.options[item.answer];
+
+    tbody.innerHTML += `<tr>
+      <td style="max-width:300px; word-wrap:break-word;">${item.q}</td>
+      <td>${userText}</td>
+      <td>${correctText}</td>
+      <td style="font-weight:700; color:${statusText==='Correct'?'#166534':'#b91c1c'}">${statusText}</td>
+    </tr>`;
+
+    // Rerender MathJax for the new content
+    MathJax.typesetPromise([tbody]).catch((err) => console.error(err.message));
+  });
+
+  const totalQuestions = questionsArray.length;
+  const pct = ((score / totalQuestions) * 100).toFixed(2);
+  let grade = '';
+  if(pct >= 90) grade = 'A+';
+  else if(pct >= 80) grade = 'A';
+  else if(pct >= 70) grade = 'B';
+  else if(pct >= 60) grade = 'C';
+  else grade = 'F';
+
+  document.getElementById('score-summary').innerText = `Score: ${score}/${totalQuestions} | Percentage: ${pct}% | Grade: ${grade}`;
+
+  // ===== Send final result to Google Sheet =====
+  // try to reuse `name`, `email`, `title` values from the start form
+  const name = document.getElementById('student-name').value.trim();
+  const email = document.getElementById('student-email').value.trim();
+  const title = document.getElementById('exam-title').value.trim();
+
+  try {
+    saveExamData({
+      name: name,
+      email: email,
+      exam: title,
+      score: score,
+      total: totalQuestions,
+      correct: correctCount,
+      incorrect: incorrectCount,
+      unanswered: unansweredCount,
+      status: "Submitted",
+      time: new Date().toLocaleString()
     });
-
-    const pct = ((score / questionsArray.length) * 100).toFixed(2);
-    let grade = '';
-    if(pct >= 90) grade = 'A+';
-    else if(pct >= 80) grade = 'A';
-    else if(pct >= 70) grade = 'B';
-    else if(pct >= 60) grade = 'C';
-    else grade = 'F';
-
-    document.getElementById('score-summary').innerText = `Score: ${score}/${questionsArray.length} | Percentage: ${pct}% | Grade: ${grade}`;
-
-    // show result panel
-    document.getElementById('result-table').style.display = 'table';
-    examArea.style.display = 'none';
-    resultDiv.style.display = 'block';
-    resultDiv.scrollIntoView({behavior:'smooth'});
+  } catch (e) {
+    console.error("submit save failed", e);
   }
+  // ==============================================
+
+  // show result panel
+  document.getElementById('result-table').style.display = 'table';
+  examArea.style.display = 'none';
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({behavior:'smooth'});
+  }
+
 
   // home button
   document.getElementById('home-btn').addEventListener('click', ()=>{
@@ -812,6 +855,7 @@ async function saveExamData(payload) {
 
 </body>
 </html>
+
 
 
 
