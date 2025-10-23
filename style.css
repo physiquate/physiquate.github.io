@@ -184,7 +184,7 @@ body {
 }
 
 .site-title {
-  font-family: "Inter", sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: clamp(28px,6vw,56px);
   margin: 0;
   color: var(--light);
