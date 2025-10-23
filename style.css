@@ -191,7 +191,7 @@ body {
 
 .site-title {
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(28px,6vw,56px);
+  font-size: clamp(28px,6vw,48px);
   margin: 0;
   color: var(--light);
   text-shadow: 0 6px 18px rgba(0,0,0,0.45);
