@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physiquate — Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    // 🔥 YOUR FIREBASE CONFIG
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEz91h9AFsiQVwdyR2jwzris1cuW2nXPE",
+      authDomain: "physiquate-auth.firebaseapp.com",
+      projectId: "physiquate-auth",
+      storageBucket: "physiquate-auth.appspot.com",
+      messagingSenderId: "960592727225",
+      appId: "1:960592727225:web:44c9a39a1418a148749f68",
+      measurementId: "G-ZFDNB7Q63B"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Toggle between login/register
+
+
+    // REGISTER
+    window.registerUser = async () => {
+      const email = document.getElementById("reg-email").value;
+      const pass = document.getElementById("reg-pass").value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, pass);
+        alert("Registration successful!");
+        window.location.href = "index.html"; // redirect to homepage
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    // LOGIN
+    window.loginUser = async () => {
+      const email = document.getElementById("login-email").value;
+      const pass = document.getElementById("login-pass").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        alert("Login successful!");
+        window.location.href = "index.html";
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    // GOOGLE LOGIN
+    window.googleLogin = async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        alert("Logged in with Google!");
+        window.location.href = "index.html";
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+  </script>
+
+
+  <style>
+    body {
+      margin:0; display:flex; justify-content:center; align-items:center;
+      min-height:100vh;
+      background:radial-gradient(circle at top left,#0a192f,#020c1b);
+      font-family:"Inter",sans-serif; color:#fff;
+    }
+    .box {
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(20px);
+      border-radius:20px;
+      width:360px; padding:2rem; text-align:center;
+      box-shadow:0 0 30px rgba(100,255,218,0.2);
+    }
+    h2 {font-family:"Orbitron",sans-serif;color:#64ffda;margin-bottom:1.2rem;}
+    input {
+      width:100%; padding:.7rem; margin:.5rem 0 1rem;
+      border:none; border-radius:8px; background:rgba(255,255,255,0.1);
+      color:#fff;
+    }
+    button {
+      width:100%; padding:.8rem; border:none; border-radius:8px;
+      font-weight:600; cursor:pointer; text-transform:uppercase;
+      background:linear-gradient(90deg,#64ffda,#00b4d8); color:#0a192f;
+    }
+    button:hover {box-shadow:0 0 15px #64ffda;}
+    p {margin-top:1rem;color:#a8b2d1;font-size:.9rem;}
+    span {color:#64ffda;cursor:pointer;}
+    .hidden{display:none;}
+    .google-btn {
+      margin-top:1rem;
+      background:#fff; color:#000; font-weight:600;
+      display:flex; align-items:center; justify-content:center;
+      gap:.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Physiquate Portal</h2>
+
+    <div id="login-form">
+      <input id="login-email" type="email" placeholder="Email" />
+      <input id="login-pass" type="password" placeholder="Password" />
+      <button onclick="loginUser()">Login</button>
+      <button class="google-btn" onclick="googleLogin()">🔵 Login with Google</button>
+      <button onclick="window.location.href='register.html'" style="margin-top:0.5rem;">Register</button>
+    </div>
+
+    <div id="register-form" class="hidden">
+      <input id="reg-email" type="email" placeholder="Email" />
+      <input id="reg-pass" type="password" placeholder="Create password" />
+      <button onclick="registerUser()">Register</button>
+      <p>Already have an account? <span onclick="toggleForm()">Login</span></p>
+    </div>
+  </div>
+</body>
+</html>
