@@ -760,11 +760,15 @@ function renderMath() {
 
   // initial progress update
   updateProgress();
-
+  // ===== Step 5: Render Math =====
+  if (window.MathJax) {
+    MathJax.typesetPromise();
+  }
 }); // DOMContentLoaded
 </script>
 
 </body>
 </html>
+
 
 
