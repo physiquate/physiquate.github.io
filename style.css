@@ -286,3 +286,44 @@ body {
 
 /* Smooth scroll */
 html { scroll-behavior: smooth; }
+
+/* ====== TICKER STYLES ====== */
+.ticker {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.24);  /* darker strip for clarity */
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  padding: 8px 0;                 /* adds space inside the bar */
+  position: fixed;
+  top: 98px;   /* around navbar height (your nav padding = ~60–70px) */
+  left: 0;
+  right: 0;
+  z-index: 55; /* below navbar (z-index 60), above hero */
+}
+/* Make sure ticker appears below navbar */
+
+.ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker-scroll 18s linear infinite;
+}
+
+.ticker-content span {
+  display: inline-block;
+  padding: 0 3rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Animation that moves the ticker text */
+@keyframes ticker-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Pause animation when hovered */
+.ticker-content:hover {
+  animation-play-state: paused;
+}
