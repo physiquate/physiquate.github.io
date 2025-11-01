@@ -307,7 +307,7 @@ html { scroll-behavior: smooth; }
 .ticker-content {
   display: inline-block;
   white-space: nowrap;
-  animation: ticker-scroll 40s linear infinite;
+  animation: ticker-scroll 30s linear infinite;
 }
 
 .ticker-content span {
