@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Physiquate Exam Portal — Modern</title>
+
+  <!-- Google Font and icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath:[['\\(','\\)'], ['$', '$']], displayMath:[['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo"><img src="logo.png" alt="Logo" /></div>
+    <div><h1>Physiquate</h1><p style="opacity:0.85">Competitive Exam Portal</p></div>
+  </div>
+  <div class="header-right">
+    <!----------------------------------------------------- change the exam header title here --------------------------------------------------->
+    <div class="user-info" id="header-exam-title">Mathematical Physics - Vector Calculus</div>
+    <!----------------------------------------------------- change the exam header title here --------------------------------------------------->
+    <div class="timer" id="timer"><span id="timer-val">00:00</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="exam-wrap">
+    <!-- left -->
+    <div class="card" id="left-card">
+      <div id="student-form">
+        <h2 style="margin-bottom:10px;">Enter Candidate Details</h2>
+        <div style="margin-bottom:10px;"><label style="display:block;font-weight:600;margin-bottom:6px;">Name</label><input id="student-name" type="text" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef9"></div>
+        <div style="margin-bottom:10px;"><label style="display:block;font-weight:600;margin-bottom:6px;">Email</label><input id="student-email" type="email" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef9"></div>
+        <!----------------------------------------------------- change the exam title here --------------------------------------------------->
+        <div style="margin-bottom:10px;"><label style="display:block;font-weight:600;margin-bottom:6px;">Exam title</label><input id="exam-title" type="text" value="Mathematical Physics Vector calculus" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef9"></div>
+        <!----------------------------------------------------- change the exam title here --------------------------------------------------->
+        <div style="display:flex;gap:10px;">
+          <button class="cta" id="start-exam">Start Exam</button>
+        </div>
+      </div>
+
+      <div id="exam" style="display:none;">
+        <div class="meta">
+          <div><div class="title" id="q-num">Q1</div><div class="small" id="q-type">Single correct</div></div>
+          <div class="small" id="q-timer">Time left: <span id="timer-small">--:--</span></div>
+        </div>
+        <div id="questions-root"></div>
+
+        <div class="controls">
+          <div style="display:flex; gap:8px;">
+            <button class="muted" id="prev">Previous</button>
+            <button class="muted" id="next">Next</button>
+            <button class="muted" id="mark">Mark for review</button>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="cta" id="save-next">Save & Next</button>
+            <button class="cta" id="submit-btn" style="background:#059669">Submit Exam</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="result" style="display:none; margin-top:12px;">
+        <h3>Exam Report</h3>
+        <p id="student-info" style="font-size:14px;color:#334155"></p>
+        <p id="score-summary" style="font-weight:600"></p>
+        <div style="overflow-x:auto;">
+          <table class="result-table" id="result-table" style="display:none;">
+            <thead><tr><th>Question</th><th>Your Answer</th><th>Correct Answer</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:12px; display:flex; gap:8px;">
+          <button class="muted" id="home-btn">Home</button>
+          <button class="cta" id="download-csv">Download CSV</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- right -->
+    <div class="side">
+      <div class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <div style="font-weight:700;">Progress</div>
+          <div id="progress-text" style="font-size:13px;color:#475569">0 / 0</div>
+        </div>
+        <div class="progress" aria-hidden="true"><i id="progress-bar"></i></div>
+        <div style="margin-top:12px; font-size:13px; color:#475569;">Question Palette</div>
+        <div class="palette" id="palette-root" style="margin-top:8px;"></div>
+      </div>
+
+      <div class="panel">
+        <div style="font-weight:700; margin-bottom:8px;">Exam Info</div>
+        <div style="font-size:14px; color:#475569;">
+          Duration: <span id="duration-text">30</span><br>
+          Total Questions: <span id="total-q">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
