@@ -79,7 +79,7 @@ window.questionSet = [
     "Kerala",
     "Goa"
   ],
-  answer: 2 
+  answer: 1 
 },
 { 
   q: "Which country became the first in Latin America to legalize euthanasia?", 
@@ -224,4 +224,5 @@ window.questionSet = [
   
     
 ];
+
 
