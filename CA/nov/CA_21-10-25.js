@@ -209,7 +209,7 @@ window.questionSet = [
     "Odisha",
     "Kerala"
   ], 
-  answer: 2
+  answer: 0
 },
 { 
   q: "Who conducted the world’s first live underwater interview?", 
@@ -224,3 +224,4 @@ window.questionSet = [
   
     
 ];
+
