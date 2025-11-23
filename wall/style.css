@@ -1,0 +1,231 @@
+:root {
+    --bg-color: #050507;
+    --hud-color: #00f0ff; /* Cyan Neon */
+    --hud-bg: rgba(0, 20, 40, 0.7);
+    --text-color: #e0f0ff;
+    --alert-color: #ff0055;
+    --font-main: 'Courier New', Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow: hidden; /* Prevent scrollbars */
+    height: 100vh;
+    width: 100vw;
+}
+
+#dashboard-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Background Canvas */
+#canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* HUD Overlay */
+#hud-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 20px;
+    pointer-events: none; /* Let clicks pass through to canvas if needed */
+}
+
+/* Header */
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--hud-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+}
+
+.hud-header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--hud-color);
+}
+
+.highlight {
+    color: var(--hud-color);
+}
+
+.clock {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Main Grid */
+.hud-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hud-panel {
+    background: var(--hud-bg);
+    border: 1px solid var(--hud-color);
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto; /* Re-enable clicks for panels */
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.hud-panel h2 {
+    font-size: 1rem;
+    border-bottom: 1px solid var(--hud-color);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: var(--hud-color);
+}
+
+/* Log Panel */
+.log-panel {
+    font-size: 0.8rem;
+}
+
+.log-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse; /* Newest at bottom visually if we append there, but let's stick to standard */
+    font-family: 'Consolas', monospace;
+}
+
+.log-line {
+    margin-bottom: 4px;
+    opacity: 0.8;
+}
+
+/* Center Panel */
+.center-panel {
+    background: transparent; /* Keep center clear for the sphere */
+    border: none;
+    box-shadow: none;
+    align-items: center;
+    justify-content: flex-end; /* Push stats to bottom */
+    pointer-events: none;
+}
+
+.central-stats {
+    display: flex;
+    gap: 20px;
+    pointer-events: auto;
+}
+
+.stat-circle {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--hud-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px var(--hud-color);
+}
+
+.stat-circle .label {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.stat-circle .value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--hud-color);
+}
+
+/* Chart Panel */
+.chart-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.hud-btn {
+    background: transparent;
+    border: 1px solid var(--hud-color);
+    color: var(--hud-color);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.hud-btn:hover, .hud-btn.active {
+    background: var(--hud-color);
+    color: #000;
+    box-shadow: 0 0 10px var(--hud-color);
+}
+
+.chart-wrapper {
+    flex-grow: 1;
+    position: relative;
+    min-height: 200px;
+}
+
+.chart-info {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--hud-color);
+}
+
+/* Footer */
+.hud-footer {
+    margin-top: 20px;
+    border-top: 1px solid var(--hud-color);
+    padding-top: 10px;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.status-bar span {
+    margin-left: 20px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--hud-color);
+}
