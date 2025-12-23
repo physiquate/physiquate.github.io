@@ -114,3 +114,38 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(panel);
   });
 });
+
+// ===== COURSE CARD CLICK NAVIGATION =====
+document.addEventListener("DOMContentLoaded", () => {
+
+  const courseLinks = {
+    "CSIR NET Physics": "../CSIR-NET/index.html",
+    "GATE Physics": "../GATE/index.html",
+    "AAI - ATC": "../AAI-ATC/index.html",
+    "JEE": "../JEE/index.html",
+    "NEET": "../NEET/index.html",
+    "Quizzes & Notes": "../QUIZZES/index.html"
+  };
+
+  const courseSection = document.getElementById("Courses");
+  if (!courseSection) return;
+
+  const cards = courseSection.querySelectorAll(".about-card");
+
+  cards.forEach(card => {
+    const titleEl = card.querySelector("h3");
+    if (!titleEl) return;
+
+    const title = titleEl.innerText.trim();
+
+    if (courseLinks[title]) {
+      card.style.cursor = "pointer";
+
+      card.addEventListener("click", () => {
+        window.location.href = courseLinks[title];
+      });
+    }
+  });
+
+});
+
