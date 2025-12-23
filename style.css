@@ -520,3 +520,11 @@ html {
   transform: translateX(100%);
   transition: 0.5s;
 }
+/* ===== COURSE CARD CLICK INDICATOR ===== */
+#Courses .about-card {
+  cursor: pointer;
+}
+#Courses .about-card:focus-visible {
+  outline: 2px solid #64ffda;
+  outline-offset: 4px;
+}
