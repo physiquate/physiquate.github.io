@@ -367,7 +367,9 @@ html {
 
 .active,
 .collapsible:hover {
-  background-color: #17b4e9;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #64ffda;
+  color: #0a192f !important;
 }
 
 .collapsible:after {
