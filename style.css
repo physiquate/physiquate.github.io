@@ -385,7 +385,7 @@ html {
   content: "\2212";
   /* Unicode character for "minus" sign (-) */
 }
-
+/*
 .content {
   padding: 0 18px;
   max-height: 0;
@@ -395,6 +395,58 @@ html {
   color: #000;
   border-radius: 0 0 4px 4px;
   margin-bottom: 10px;
+}
+*/
+/* ===== NEW COLLAPSIBLE DESIGN ===== */
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  background: linear-gradient(180deg, #0b1620, #060c12);
+  border-left: 3px solid #64ffda;
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 16px;
+  box-shadow: inset 0 0 25px rgba(100, 255, 218, 0.06);
+}
+
+/* Space inside */
+.collapsible-content ul {
+  list-style: none;
+  padding: 20px 24px;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+/* Each item becomes a card */
+.collapsible-content ul li {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Text inside */
+.collapsible-content ul li a {
+  text-decoration: none;
+  color: #e6f1ff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: block;
+}
+
+/* Hover effect */
+.collapsible-content ul li:hover {
+  background: rgba(100, 255, 218, 0.1);
+  border-color: #64ffda;
+  transform: translateX(4px);
+  box-shadow: 0 0 18px rgba(100, 255, 218, 0.18);
+}
+
+.collapsible-content ul li:hover a {
+  color: #64ffda;
 }
 
 .content ul {
