@@ -1,3 +1,15 @@
+// ===== LOAD NAVBAR (RUNS ONCE) =====
+fetch("navbar.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+  })
+  .catch(error => {
+    console.error("Error loading navbar:", error);
+  });
+
+
+// ===== CANVAS SETUP =====
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -7,6 +19,7 @@ function resize() {
 }
 resize();
 window.addEventListener("resize", resize);
+
 
 /* =========================
    WARP SPEED STAR FIELD
@@ -40,17 +53,6 @@ function pickColor() {
 
 function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.45)";
- // ===== LOAD NAVBAR =====
-fetch("navbar.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("navbar").innerHTML = data;
-  })
-  .catch(error => {
-    console.error("Error loading navbar:", error);
-  });
-
-  
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const cx = canvas.width / 2;
