@@ -1,5 +1,10 @@
 // Dynamically load navbar
-fetch("../common/nav.html")
+// Get the current script's path (nav-loader.js)
+const scriptPath = document.currentScript.src;
+// Derive nav.html path by replacing "nav-loader.js" with "nav.html"
+const navPath = scriptPath.replace("nav-loader.js", "nav.html");
+
+fetch(navPath)
   .then(res => res.text())
   .then(html => {
     document.getElementById("navbar").innerHTML = html;
