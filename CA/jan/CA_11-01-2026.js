@@ -221,9 +221,10 @@ window.questionSet = [
   ],
   answer: 2,
 
-},
+}
   
     
 ];
+
 
 
